@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#4A3728" />
+    <meta name="description" content="PWA para gestión de recetas y costos - CALIPAN VIRREY Panadería" />
+    <meta name="application-name" content="CALIPAN VIRREY" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CALIPAN VIRREY" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#4A3728" />
+    
+    <link rel="manifest" href="/manifest.json" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>CALIPAN VIRREY - Panadería</title>
+    <style>
+      * { font-family: 'Inter', sans-serif; }
+      h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+      
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+    </style>
+  </head>
+  <body class="bg-cream dark:bg-gray-950 text-primary dark:text-gray-100 overflow-x-hidden">
+    <div id="root"></div>
+    
+    <script type="module" src="/src/index.tsx"></script>
+    
+    <script>
+      // ====== SERVICE WORKER REGISTRATION - MEJORADO PARA OFFLINE ======
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', async () => {
+          try {
+            console.log('🔧 Iniciando registro de Service Worker...');
+            
+            const reg = await navigator.serviceWorker.register('/sw.js', {
+              scope: '/',
+            });
+            
+            console.log('✅ Service Worker registrado correctamente:', reg);
+            
+            // Escuchar actualizaciones
+            reg.addEventListener('updatefound', () => {
+              const newWorker = reg.installing;
+              console.log('🔄 Nueva versión del SW detectada');
+              
+              newWorker?.addEventListener('statechange', () => {
+                if (newWorker.state === 'activated') {
+                  console.log('⚡ SW actualizado y activado');
+                }
+              });
+            });
+            
+            // Si hay un controller activo, el SW ya está trabajando
+            if (navigator.serviceWorker.controller) {
+              console.log('📡 SW activo controlando las peticiones');
+            }
+            
+            // Enviar mensaje al SW para cachear assets específicos
+            if (navigator.serviceWorker.controller) {
+              navigator.serviceWorker.controller.postMessage({
+                type: 'CACHE_ASSETS',
+                assets: [
+                  '/',
+                  '/index.html',
+                  '/manifest.json',
+                ],
+              });
+            }
+            
+          } catch (error) {
+            console.error('❌ Error al registrar Service Worker:', error);
+            console.log('ℹ️ La aplicación funcionará en modo online');
+          }
+        });
+        
+        // Detectar cambios de conectividad
+        window.addEventListener('online', () => {
+          console.log('🌐 Conexión online restaurada');
+        });
+        
+        window.addEventListener('offline', () => {
+          console.log('📴 Modo offline - usando cache');
+        });
+      }
+      
+      document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) return;
+        const touch = e.touches[0];
+        if (touch.clientY > 0) return;
+        e.preventDefault();
+      }, { passive: false });
+    </script>
+  </body>
+</html>
