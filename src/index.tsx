@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   LogOut, Plus, ShoppingCart, BookOpen,
   Edit2, Trash2, Eye, EyeOff,
-  Download, Zap, TrendingUp,
+  Download, Zap, TrendingUp, Sun, Moon,
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
@@ -2349,12 +2349,37 @@ const useIsMobile = () => {
 // DESKTOP NAVBAR SIDEBAR
 // ============================================================================
 
+// ============================================================================
+// DARK MODE HOOK
+// ============================================================================
+
+const useDarkMode = (): [boolean, () => void] => {
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem('calipan-dark-mode');
+    if (saved !== null) return saved === 'true';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('calipan-dark-mode', String(isDark));
+  }, [isDark]);
+
+  return [isDark, () => setIsDark(prev => !prev)];
+};
+
+// ============================================================================
+// DESKTOP SIDEBAR
+// ============================================================================
+
 const DesktopSidebar: React.FC<{
   user: User;
   currentView: string;
   onViewChange: (view: string) => void;
   onLogout: () => void;
-}> = ({ user, currentView, onViewChange, onLogout }) => {
+  isDark: boolean;
+  onToggleDark: () => void;
+}> = ({ user, currentView, onViewChange, onLogout, isDark, onToggleDark }) => {
   const navItems = [
     { id: 'home',       label: 'Inicio',      icon: '🏠', activeColor: 'from-peach to-blush',  border: 'border-peach' },
     { id: 'recipes',    label: 'Recetas',     icon: '📖', activeColor: 'from-caramel to-secondary',  border: 'border-caramel' },
@@ -2434,8 +2459,17 @@ const DesktopSidebar: React.FC<{
         })}
       </nav>
 
-      {/* Bottom: logout + version */}
-      <div className="px-3 pb-5 border-t border-caramel/15 pt-4 space-y-3">
+      {/* Bottom: dark toggle + logout + version */}
+      <div className="px-3 pb-5 border-t border-caramel/15 pt-4 space-y-2">
+        <motion.button
+          whileHover={{ scale:1.02 }}
+          whileTap={{ scale:0.97 }}
+          onClick={onToggleDark}
+          className="w-full bg-white/8 hover:bg-white/15 text-vanilla/60 hover:text-vanilla px-4 py-2.5 rounded-2xl flex items-center justify-center gap-2 font-medium text-sm transition-all border border-white/10"
+        >
+          {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          {isDark ? 'Modo Claro' : 'Modo Oscuro'}
+        </motion.button>
         <motion.button
           whileHover={{ scale:1.02 }}
           whileTap={{ scale:0.97 }}
@@ -2459,6 +2493,7 @@ const App: React.FC = () => {
   const state = useAppState();
   const [currentView, setCurrentView] = useState('home');
   const isMobile = useIsMobile();
+  const [isDark, toggleDark] = useDarkMode();
 
   const renderView = () => {
     switch (currentView) {
@@ -2503,7 +2538,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-vanilla to-wheat dark:from-gray-950 dark:via-cocoa dark:to-mocha">
+    <div className={`min-h-screen ${isDark ? '' : 'bg-gradient-to-br from-cream via-vanilla to-wheat'}`}>
       {/* Desktop Layout */}
       {!isMobile && (
         <>
@@ -2515,6 +2550,8 @@ const App: React.FC = () => {
               state.setUser(null);
               localStorage.removeItem('calipan-remember');
             }}
+            isDark={isDark}
+            onToggleDark={toggleDark}
           />
           {/* Desktop top header */}
           <header className="fixed top-0 left-72 right-0 h-14 glass-warm bg-gradient-to-r from-vanilla/90 to-wheat/85 dark:from-mocha/80 dark:to-cocoa/70 backdrop-blur border-b border-caramel/20 flex items-center px-8 z-40">
@@ -2542,6 +2579,24 @@ const App: React.FC = () => {
       {/* Mobile Layout */}
       {isMobile && (
         <>
+          {/* Dark mode toggle - flotante mobile */}
+          <motion.button
+            className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full flex items-center justify-center shadow-lg"
+            style={{
+              background: isDark ? 'rgba(218,165,32,0.15)' : 'rgba(91,58,41,0.1)',
+              border: isDark ? '1px solid rgba(218,165,32,0.3)' : '1px solid rgba(91,58,41,0.15)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            }}
+            onClick={toggleDark}
+            whileTap={{ scale: 0.88 }}
+            whileHover={{ scale: 1.05 }}
+          >
+            {isDark
+              ? <Sun size={18} color="#DAA520" />
+              : <Moon size={18} color="#5B3A29" />}
+          </motion.button>
+
           <main className="w-full px-4 py-4 pb-24">
             <motion.div
               key={currentView}
