@@ -663,32 +663,32 @@ const LoginFormPanel: React.FC<{
   <div className="w-full space-y-5">
     {/* Username */}
     <div>
-      <label className="block text-sm font-black text-cream mb-2">👤 USUARIO</label>
+      <label className="block text-sm font-semibold text-vanilla mb-2 tracking-wide">👤 Usuario</label>
       <input
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="w-full px-5 py-4 rounded-2xl bg-white/15 border-2 border-white/30 text-cream placeholder-cream/50 focus:outline-none focus:border-cream focus:bg-white/20 transition-all text-lg font-bold backdrop-blur"
+        className="w-full px-5 py-4 rounded-3xl bg-white/20 border-2 border-peach/40 text-vanilla placeholder-vanilla/60 focus:outline-none focus:border-peach focus:bg-white/25 transition-all text-lg font-medium backdrop-blur-xl shadow-inner"
         placeholder="calipan"
         autoComplete="username"
       />
     </div>
     {/* Password */}
     <div>
-      <label className="block text-sm font-black text-cream mb-2">🔐 CONTRASEÑA</label>
+      <label className="block text-sm font-semibold text-vanilla mb-2 tracking-wide">🔐 Contraseña</label>
       <div className="relative">
         <input
           type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-5 py-4 rounded-2xl bg-white/15 border-2 border-white/30 text-cream placeholder-cream/50 focus:outline-none focus:border-cream focus:bg-white/20 transition-all text-lg font-bold backdrop-blur"
+          className="w-full px-5 py-4 rounded-3xl bg-white/20 border-2 border-peach/40 text-vanilla placeholder-vanilla/60 focus:outline-none focus:border-peach focus:bg-white/25 transition-all text-lg font-medium backdrop-blur-xl shadow-inner"
           placeholder="••••••••"
           autoComplete="current-password"
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/70 hover:text-cream transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-vanilla/70 hover:text-vanilla transition-colors"
         >
           {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
         </button>
@@ -700,51 +700,51 @@ const LoginFormPanel: React.FC<{
           initial={{ opacity: 0, y: -8, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0 }}
-          className="bg-red-500/30 border-2 border-red-400/50 text-red-100 px-5 py-3 rounded-2xl text-sm text-center font-bold"
+          className="bg-blush/40 border-2 border-blush/60 text-primary px-5 py-3 rounded-2xl text-sm text-center font-semibold backdrop-blur-sm"
         >
           {error}
         </motion.div>
       )}
     </AnimatePresence>
     {/* Remember */}
-    <label className="flex items-center gap-3 text-cream text-sm cursor-pointer font-bold">
+    <label className="flex items-center gap-3 text-vanilla/90 text-sm cursor-pointer font-medium">
       <input
         type="checkbox"
         checked={remember}
         onChange={(e) => setRemember(e.target.checked)}
-        className="w-5 h-5 rounded-lg accent-cream cursor-pointer"
+        className="w-5 h-5 rounded-lg accent-peach cursor-pointer"
       />
       Recordar credenciales
     </label>
     {/* Login Button */}
     <motion.button
-      whileHover={{ scale: 1.04, boxShadow: '0 20px 40px rgba(255,255,255,0.2)' }}
-      whileTap={{ scale: 0.93 }}
+      whileHover={{ scale: 1.03, boxShadow: '0 20px 50px rgba(212, 165, 116, 0.35)' }}
+      whileTap={{ scale: 0.97 }}
       type="submit"
       disabled={isLoading}
-      className="w-full bg-gradient-to-r from-cream to-cream/90 hover:from-cream hover:to-cream text-primary font-black py-4 rounded-2xl text-xl transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
+      className="w-full bg-gradient-to-r from-peach via-vanilla to-wheat hover:from-vanilla hover:to-peach text-primary font-bold py-4 rounded-3xl text-xl transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2 shadow-warm border border-white/30"
     >
       {isLoading ? (
-        <><motion.span animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity }}>⚡</motion.span> INGRESANDO...</>
-      ) : '✅ INGRESAR'}
+        <><motion.span animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity }}>🥐</motion.span> Ingresando...</>
+      ) : '✨ Ingresar'}
     </motion.button>
     {/* Quick access */}
     <div>
-      <p className="text-cream/60 text-center text-xs font-black tracking-widest mb-3">⚡ ACCESO RÁPIDO</p>
+      <p className="text-vanilla/50 text-center text-xs font-semibold tracking-widest mb-3">✦ Acceso Rápido</p>
       <div className="grid grid-cols-2 gap-3">
         {[
-          { user: 'Administrador', label: 'DUEÑO',     icon: '👑' },
-          { user: 'calipan',       label: 'PANADERO',  icon: '👨‍🍳' },
-          { user: 'familia',       label: 'FAMILIA',   icon: '👨‍👩‍👧' },
-          { user: 'solonacional',  label: 'PERSONAL',  icon: '🏭' },
+          { user: 'Administrador', label: 'Dueño',     icon: '👑', color: 'from-honey/40 to-caramel/30' },
+          { user: 'calipan',       label: 'Panadero',  icon: '👨‍🍳', color: 'from-peach/40 to-blush/30' },
+          { user: 'familia',       label: 'Familia',   icon: '👨‍👩‍👧', color: 'from-blush/40 to-vanilla/30' },
+          { user: 'solonacional',  label: 'Personal',  icon: '🏭', color: 'from-wheat/40 to-latte/30' },
         ].map((q) => (
           <motion.button
             key={q.user}
             type="button"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => quickLogin(q.user)}
-            className="bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40 text-cream py-2.5 px-3 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2"
+            className={`bg-gradient-to-br ${q.color} backdrop-blur-xl border border-white/30 text-vanilla py-3 px-4 rounded-2xl text-xs font-semibold transition-all flex items-center justify-center gap-2 shadow-glass hover:shadow-warm`}
           >
             <span className="text-lg">{q.icon}</span>
             <span>{q.label}</span>
@@ -811,16 +811,20 @@ const LoginPage: React.FC<{
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen bg-gradient-to-br from-primary via-secondary to-primary relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-br from-primary via-mocha to-caramel relative overflow-hidden"
     >
-      {/* Animated blobs */}
-      <motion.div animate={{ y: [0,-50,0], x:[0,30,0] }} transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-10 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-      <motion.div animate={{ y: [0,50,0], x:[0,-30,0] }} transition={{ duration: 10, repeat: Infinity, delay:1 }}
-        className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative vintage background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div animate={{ y: [0,-30,0], x:[0,20,0], rotate:[0, 5, 0] }} transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute -top-20 -left-20 w-96 h-96 bg-gradient-to-br from-peach/20 to-vanilla/10 rounded-full blur-3xl" />
+        <motion.div animate={{ y: [0,40,0], x:[0,-25,0] }} transition={{ duration: 15, repeat: Infinity, delay:2, ease: 'easeInOut' }}
+          className="absolute -bottom-20 -right-20 w-[500px] h-[500px] bg-gradient-to-br from-honey/15 to-caramel/10 rounded-full blur-3xl" />
+        <motion.div animate={{ scale:[1, 1.1, 1] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/3 right-1/4 w-64 h-64 bg-blush/10 rounded-full blur-2xl" />
+      </div>
 
       {/* ========== MOBILE: centrado vertical ========== */}
-      <div className="lg:hidden min-h-screen flex flex-col items-center justify-center p-5">
+      <div className="lg:hidden min-h-screen flex flex-col items-center justify-center p-5 relative z-10">
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -828,13 +832,13 @@ const LoginPage: React.FC<{
           className="w-full max-w-sm"
         >
           <div className="text-center mb-8">
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity }}
-              className="text-7xl inline-block mb-4 drop-shadow-2xl">🥐</motion.div>
-            <h1 className="text-4xl font-black font-playfair text-cream mb-1">CALIPAN VIRREY</h1>
-            <p className="text-cream/80 text-sm font-bold tracking-widest">PANADERÍA PREMIUM</p>
-            <span className="inline-block mt-2 px-3 py-0.5 rounded-full bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 text-[10px] font-black tracking-widest uppercase">v1.0.0 · Beta</span>
+            <motion.div animate={{ y:[0, -10, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-8xl inline-block mb-4 drop-shadow-2xl">🥐</motion.div>
+            <h1 className="text-4xl font-bold font-playfair text-vanilla mb-2 tracking-wide">Calipan Virrey</h1>
+            <p className="text-peach/80 text-sm font-medium tracking-[0.25em] uppercase">Panadería Artesanal</p>
+            <span className="inline-block mt-3 px-4 py-1 rounded-full bg-honey/20 border border-honey/30 text-honey text-[10px] font-semibold tracking-widest uppercase">v1.0.0 · Premium</span>
           </div>
-          <div className="glass rounded-3xl p-6 backdrop-blur-xl border border-white/30 shadow-2xl">
+          <div className="glass-warm rounded-[32px] p-7 shadow-warm border border-white/20">
             <form onSubmit={handleLogin}>
               <LoginFormPanel
                 username={username} setUsername={setUsername}
@@ -846,12 +850,12 @@ const LoginPage: React.FC<{
               />
             </form>
           </div>
-          <p className="text-cream/40 text-xs text-center mt-6">🔒 Datos seguros offline</p>
+          <p className="text-vanilla/30 text-xs text-center mt-6 font-medium">🔒 Datos seguros · Funciona offline</p>
         </motion.div>
       </div>
 
       {/* ========== DESKTOP: Split Screen ========== */}
-      <div className="hidden lg:flex min-h-screen">
+      <div className="hidden lg:flex min-h-screen relative z-10">
 
         {/* IZQUIERDA — Branding 55% */}
         <motion.div
@@ -862,18 +866,18 @@ const LoginPage: React.FC<{
         >
           <div className="text-center max-w-md">
             <motion.div
-              animate={{ rotate: 360, scale:[1,1.05,1] }}
-              transition={{ duration: 8, repeat: Infinity }}
-              className="text-[120px] leading-none mb-8 drop-shadow-2xl"
+              animate={{ y:[0, -15, 0], rotate:[0, 3, -3, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-[140px] leading-none mb-10 drop-shadow-2xl"
             >🥐</motion.div>
 
-            <h1 className="text-7xl font-black font-playfair text-cream mb-4 leading-tight">
-              CALIPAN<br/>VIRREY
+            <h1 className="text-7xl font-bold font-playfair text-vanilla mb-4 leading-tight tracking-wide">
+              Calipan<br/>Virrey
             </h1>
-            <p className="text-cream/80 text-xl font-bold tracking-[0.3em] mb-12">PANADERÍA PREMIUM</p>
+            <p className="text-peach/70 text-xl font-medium tracking-[0.4em] mb-14 uppercase">Panadería Artesanal</p>
 
             {/* Features */}
-            <div className="grid grid-cols-2 gap-4 text-left">
+            <div className="grid grid-cols-2 gap-5 text-left">
               {[
                 { icon: '📖', title: '20 Recetas', desc: 'Pan, pasteles y más' },
                 { icon: '🧮', title: 'Calculadora', desc: 'Escala ingredientes' },
@@ -882,20 +886,20 @@ const LoginPage: React.FC<{
               ].map((f) => (
                 <motion.div
                   key={f.title}
-                  whileHover={{ scale: 1.04, y: -3 }}
-                  className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4"
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="glass-warm backdrop-blur-xl border border-white/15 rounded-3xl p-5 shadow-glass hover:shadow-warm transition-all duration-300"
                 >
-                  <div className="text-3xl mb-1">{f.icon}</div>
-                  <p className="text-cream font-black text-sm">{f.title}</p>
-                  <p className="text-cream/60 text-xs">{f.desc}</p>
+                  <div className="text-4xl mb-2">{f.icon}</div>
+                  <p className="text-vanilla font-semibold text-sm">{f.title}</p>
+                  <p className="text-peach/60 text-xs">{f.desc}</p>
                 </motion.div>
               ))}
             </div>
 
-            <div className="mt-10 flex items-center justify-center gap-3">
-              <div className="w-2 h-2 bg-cream/60 rounded-full animate-bounce" style={{animationDelay:'0ms'}} />
-              <div className="w-2 h-2 bg-cream/60 rounded-full animate-bounce" style={{animationDelay:'150ms'}} />
-              <div className="w-2 h-2 bg-cream/60 rounded-full animate-bounce" style={{animationDelay:'300ms'}} />
+            <div className="mt-12 flex items-center justify-center gap-4">
+              <div className="w-2 h-2 bg-peach/50 rounded-full animate-bounce" style={{animationDelay:'0ms'}} />
+              <div className="w-2 h-2 bg-peach/50 rounded-full animate-bounce" style={{animationDelay:'200ms'}} />
+              <div className="w-2 h-2 bg-peach/50 rounded-full animate-bounce" style={{animationDelay:'400ms'}} />
             </div>
           </div>
         </motion.div>
@@ -905,12 +909,12 @@ const LoginPage: React.FC<{
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-          className="w-[45%] flex items-center justify-center p-12 bg-black/20 backdrop-blur-sm border-l border-white/10"
+          className="w-[45%] flex items-center justify-center p-12 bg-gradient-to-br from-cocoa/40 to-primary/60 backdrop-blur-sm border-l border-caramel/20"
         >
           <div className="w-full max-w-md">
-            <div className="mb-8">
-              <h2 className="text-3xl font-black text-cream mb-1">Bienvenido</h2>
-              <p className="text-cream/60 text-sm font-bold">Ingresa tus credenciales para continuar</p>
+            <div className="mb-10">
+              <h2 className="text-4xl font-bold font-playfair text-vanilla mb-2">Bienvenido</h2>
+              <p className="text-peach/60 text-sm font-medium">Ingresa tus credenciales para continuar</p>
             </div>
             <form onSubmit={handleLogin}>
               <LoginFormPanel
@@ -922,7 +926,7 @@ const LoginPage: React.FC<{
                 quickLogin={quickLogin}
               />
             </form>
-            <p className="text-cream/30 text-xs text-center mt-8">🔒 Datos seguros · Modo offline disponible</p>
+            <p className="text-vanilla/25 text-xs text-center mt-10">🔒 Datos seguros · Modo offline disponible</p>
           </div>
         </motion.div>
       </div>
@@ -942,20 +946,24 @@ const HomePage: React.FC<{
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 pb-24">
-      {/* Welcome Banner */}
+      {/* Welcome Banner - Vintage Artisanal Style */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl p-6 lg:p-10 bg-gradient-to-br from-secondary via-primary to-secondary/90"
+        className="relative overflow-hidden rounded-[32px] p-7 lg:p-10 bg-gradient-to-br from-primary via-mocha to-caramel shadow-warm"
       >
-        <motion.div animate={{ scale:[1,1.1,1], rotate:[0,360] }} transition={{ duration: 8, repeat: Infinity }}
-          className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-        <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-4">
-          <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:2, repeat:Infinity }} className="text-6xl lg:text-8xl">🥐</motion.div>
+        {/* Decorative background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-peach/20 rounded-full blur-2xl" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-honey/15 rounded-full blur-2xl" />
+        </div>
+        
+        <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-start gap-5">
+          <motion.div animate={{ y:[0,-10,0] }} transition={{ duration:3, repeat:Infinity, ease: 'easeInOut' }} className="text-7xl lg:text-8xl">🥐</motion.div>
           <div className="text-center lg:text-left">
-            <h2 className="text-3xl lg:text-5xl font-bold font-playfair text-cream mb-2">¡Hola, {user.username}!</h2>
-            <p className="text-cream/70 text-sm mb-3">Bienvenido de vuelta a tu panel de control</p>
-            <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur rounded-full text-cream text-xs font-black border border-white/30">
+            <h2 className="text-3xl lg:text-5xl font-bold font-playfair text-vanilla mb-3">¡Hola, {user.username}!</h2>
+            <p className="text-peach/70 text-sm mb-4 font-medium">Bienvenido de vuelta a tu panel de control</p>
+            <span className="inline-block px-5 py-2 bg-white/15 backdrop-blur-sm rounded-full text-vanilla text-xs font-semibold border border-white/20 shadow-glass">
               {user.role === 'superadmin' && '👑 Dueño / Super Admin'}
               {user.role === 'admin' && '🔑 Administrador'}
               {user.role === 'baker' && '👨‍🍳 Panadero Jefe'}
@@ -966,83 +974,83 @@ const HomePage: React.FC<{
         </div>
       </motion.div>
 
-      {/* Stats Grid — 2 cols mobile, 4 cols desktop */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      {/* Stats Grid — Vintage Cards with Glassmorphism */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'RECETAS',    value: stats.recipes,                           icon: '📖', color: 'orange', view: 'recipes',   enabled: true },
-          { label: 'INVENTARIO', value: PERMS.canViewInventory(user.role) ? stats.inventory : '—', icon: '🛒', color: 'blue',   view: 'inventory', enabled: PERMS.canViewInventory(user.role) },
-          { label: 'PORCIONES', value: stats.recipes > 0 ? Math.floor(stats.recipes * 3) : '—', icon: '🥐', color: 'purple', view: 'calculator', enabled: PERMS.canUseCalculator(user.role) },
-          { label: 'INSUMOS',    value: PERMS.canViewInventory(user.role) ? stats.inventory : '—', icon: '📦', color: 'green',  view: 'inventory', enabled: PERMS.canViewInventory(user.role) },
+          { label: 'Recetas',    value: stats.recipes, icon: '📖', gradient: 'from-peach/30 to-blush/20', border: 'border-peach/30', view: 'recipes',   enabled: true },
+          { label: 'Inventario', value: PERMS.canViewInventory(user.role) ? stats.inventory : '—', icon: '🛒', gradient: 'from-honey/30 to-vanilla/20', border: 'border-honey/30', view: 'inventory', enabled: PERMS.canViewInventory(user.role) },
+          { label: 'Porciones', value: stats.recipes > 0 ? Math.floor(stats.recipes * 3) : '—', icon: '🥐', gradient: 'from-blush/30 to-peach/20', border: 'border-blush/30', view: 'calculator', enabled: PERMS.canUseCalculator(user.role) },
+          { label: 'Insumos',    value: PERMS.canViewInventory(user.role) ? stats.inventory : '—', icon: '📦', gradient: 'from-wheat/40 to-latte/30', border: 'border-wheat/40', view: 'inventory', enabled: PERMS.canViewInventory(user.role) },
         ].map((stat, i) => (
           <motion.button
             key={stat.label}
             initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay: 0.1 + i * 0.05 }}
-            whileHover={{ y:-5 }} whileTap={{ scale:0.93 }}
+            whileHover={{ y:-6, boxShadow: '0 15px 35px rgba(107, 68, 35, 0.15)' }} whileTap={{ scale:0.95 }}
             onClick={() => stat.enabled && onNavigate(stat.view)}
             disabled={!stat.enabled}
-            className={`rounded-3xl p-5 lg:p-6 text-left shadow-lg transition-all duration-300 border-2 ${
+            className={`rounded-3xl p-5 lg:p-6 text-left shadow-glass transition-all duration-300 border-2 backdrop-blur-sm ${
               stat.enabled
-                ? `bg-gradient-to-br from-${stat.color}-100 to-${stat.color}-50 dark:from-${stat.color}-900/40 dark:to-${stat.color}-900/20 border-${stat.color}-200 dark:border-${stat.color}-700 hover:shadow-2xl cursor-pointer`
-                : 'bg-gray-100 dark:bg-gray-800 opacity-40 cursor-not-allowed border-gray-300'
+                ? `bg-gradient-to-br ${stat.gradient} ${stat.border} hover:shadow-warm cursor-pointer`
+                : 'bg-latte/30 opacity-40 cursor-not-allowed border-latte/30'
             }`}
           >
-            <motion.div animate={{ scale:[1,1.15,1] }} transition={{ duration:2, repeat:Infinity, delay: i*0.3 }} className="text-4xl mb-3">{stat.icon}</motion.div>
-            <p className="text-xs font-black opacity-70 mb-1">{stat.label}</p>
-            <p className="text-3xl font-black">{stat.value}</p>
+            <motion.div animate={{ scale:[1,1.1,1] }} transition={{ duration:3, repeat:Infinity, delay: i*0.4 }} className="text-4xl mb-3">{stat.icon}</motion.div>
+            <p className="text-xs font-semibold opacity-70 mb-1 text-primary dark:text-vanilla tracking-wide">{stat.label}</p>
+            <p className="text-3xl font-bold text-primary dark:text-vanilla">{stat.value}</p>
           </motion.button>
         ))}
       </div>
 
-      {/* Action Buttons — 1 col mobile, 2 col desktop */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      {/* Action Buttons — Vintage Style */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <motion.button
           initial={{ opacity:0, x:-40 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.2 }}
-          whileHover={{ scale:1.03, boxShadow:'0 25px 50px rgba(74,55,40,0.3)' }} whileTap={{ scale:0.93 }}
+          whileHover={{ scale:1.02, boxShadow:'0 20px 50px rgba(107, 68, 35, 0.2)' }} whileTap={{ scale:0.97 }}
           onClick={() => onNavigate('recipes')}
-          className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-cream py-5 rounded-3xl font-black text-xl flex items-center justify-center gap-4 transition-all shadow-xl"
+          className="w-full bg-gradient-to-r from-primary via-mocha to-primary text-vanilla py-5 rounded-3xl font-bold text-xl flex items-center justify-center gap-4 transition-all shadow-warm border border-caramel/20"
         >
-          <motion.span animate={{ rotate:[0,10,-10,0] }} transition={{ duration:2, repeat:Infinity }}><BookOpen size={28}/></motion.span>
-          <span>📖 RECETAS</span>
+          <motion.span animate={{ rotate:[0,8,-8,0] }} transition={{ duration:3, repeat:Infinity }}><BookOpen size={26}/></motion.span>
+          <span>📖 Recetas</span>
         </motion.button>
 
         <motion.button
           initial={{ opacity:0, x:-40 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.25 }}
-          whileHover={{ scale:1.03, boxShadow:'0 25px 50px rgba(164,112,62,0.3)' }} whileTap={{ scale:0.93 }}
+          whileHover={{ scale:1.02, boxShadow:'0 20px 50px rgba(196, 149, 106, 0.25)' }} whileTap={{ scale:0.97 }}
           onClick={() => onNavigate('calculator')}
-          className="w-full bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-cream py-5 rounded-3xl font-black text-xl flex items-center justify-center gap-4 transition-all shadow-xl"
+          className="w-full bg-gradient-to-r from-caramel via-secondary to-caramel text-flour py-5 rounded-3xl font-bold text-xl flex items-center justify-center gap-4 transition-all shadow-warm border border-honey/30"
         >
-          <motion.span animate={{ rotate:[-10,10,-10] }} transition={{ duration:2, repeat:Infinity }}><Zap size={28}/></motion.span>
-          <span>🧮 ESCALAR RECETA</span>
+          <motion.span animate={{ rotate:[-8,8,-8] }} transition={{ duration:2.5, repeat:Infinity }}><Zap size={26}/></motion.span>
+          <span>🧮 Escalar Receta</span>
         </motion.button>
 
         {PERMS.canViewInventory(user.role) && (
           <>
             <motion.button
               initial={{ opacity:0, x:-40 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.3 }}            
-              whileHover={{ scale:1.03, boxShadow:'0 25px 50px rgba(37,99,235,0.3)' }} whileTap={{ scale:0.93 }}
+              whileHover={{ scale:1.02, boxShadow:'0 20px 50px rgba(212, 165, 116, 0.2)' }} whileTap={{ scale:0.97 }}
               onClick={() => onNavigate('inventory')}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white py-5 rounded-3xl font-black text-xl flex items-center justify-center gap-4 transition-all shadow-xl"
+              className="w-full bg-gradient-to-r from-mocha via-primary to-mocha text-vanilla py-5 rounded-3xl font-bold text-xl flex items-center justify-center gap-4 transition-all shadow-warm border border-caramel/20"
             >
-              <motion.span animate={{ y:[0,-5,0] }} transition={{ duration:1.5, repeat:Infinity }}><ShoppingCart size={28}/></motion.span>
-              <span>🛒 INVENTARIO</span>
+              <motion.span animate={{ y:[0,-4,0] }} transition={{ duration:2, repeat:Infinity }}><ShoppingCart size={26}/></motion.span>
+              <span>🛒 Inventario</span>
             </motion.button>
 
             {PERMS.canViewCosts(user.role) && (
               <motion.button
                 initial={{ opacity:0, x:-40 }} animate={{ opacity:1, x:0 }} transition={{ delay:0.35 }}
-                whileHover={{ scale:1.03, boxShadow:'0 25px 50px rgba(34,197,94,0.3)' }} whileTap={{ scale:0.93 }}
+                whileHover={{ scale:1.02, boxShadow:'0 20px 50px rgba(245, 193, 108, 0.2)' }} whileTap={{ scale:0.97 }}
                 onClick={() => onNavigate('costs')}
-                className="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white py-5 rounded-3xl font-black text-xl flex items-center justify-center gap-4 transition-all shadow-xl"
+                className="w-full bg-gradient-to-r from-honey via-caramel to-honey text-primary py-5 rounded-3xl font-bold text-xl flex items-center justify-center gap-4 transition-all shadow-warm border border-vanilla/30"
               >
-                <motion.span animate={{ scale:[1,1.2,1] }} transition={{ duration:1.5, repeat:Infinity }}><TrendingUp size={28}/></motion.span>
-                <span>💰 ANÁLISIS COSTOS</span>
+                <motion.span animate={{ scale:[1,1.15,1] }} transition={{ duration:2, repeat:Infinity }}><TrendingUp size={26}/></motion.span>
+                <span>💰 Análisis Costos</span>
               </motion.button>
             )}
           </>
         )}
       </div>
 
-      {/* Info footer */}
+      {/* Info footer - Vintage badges */}
       <motion.div
         initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay:0.4 }}
         className="grid grid-cols-3 gap-3"
@@ -1052,9 +1060,9 @@ const HomePage: React.FC<{
           { icon:'⚡', text:'Ultra rápido' },
           { icon:'💾', text:'Guarda offline' },
         ].map((info) => (
-          <div key={info.text} className="bg-indigo-500/10 dark:bg-indigo-900/30 border border-indigo-300/40 rounded-2xl p-4 text-center">
+          <div key={info.text} className="glass-card bg-gradient-to-br from-vanilla/60 to-wheat/40 border border-caramel/20 rounded-2xl p-4 text-center shadow-glass">
             <div className="text-2xl mb-1">{info.icon}</div>
-            <p className="text-xs font-bold text-indigo-800 dark:text-indigo-300">{info.text}</p>
+            <p className="text-xs font-semibold text-primary/80 dark:text-vanilla/80">{info.text}</p>
           </div>
         ))}
       </motion.div>
@@ -1073,11 +1081,11 @@ const MobileNavbar: React.FC<{
   onLogout: () => void;
 }> = ({ user, currentView, onViewChange, onLogout }) => {
   const navItems = [
-    { id: 'home',       label: 'Inicio',     icon: '🏠', color: 'text-purple-300',  dot: 'bg-purple-400'  },
+    { id: 'home',       label: 'Inicio',     icon: '🏠', color: 'text-amber-300',   dot: 'bg-amber-400'   },
     { id: 'recipes',    label: 'Recetas',    icon: '📖', color: 'text-orange-300',  dot: 'bg-orange-400'  },
-    ...(PERMS.canUseCalculator(user.role) ? [{ id: 'calculator', label: 'Calcular', icon: '🧮', color: 'text-yellow-300', dot: 'bg-yellow-400' }] : []),
-    ...(PERMS.canViewInventory(user.role) ? [{ id: 'inventory', label: 'Inventario', icon: '🛒', color: 'text-blue-300',   dot: 'bg-blue-400'    }] : []),
-    ...(PERMS.canViewCosts(user.role)     ? [{ id: 'costs',     label: 'Costos',     icon: '💰', color: 'text-green-300',  dot: 'bg-green-400'   }] : []),
+    ...(PERMS.canUseCalculator(user.role) ? [{ id: 'calculator', label: 'Calcular',   icon: '🧮', color: 'text-yellow-300', dot: 'bg-yellow-400' }] : []),
+    ...(PERMS.canViewInventory(user.role) ? [{ id: 'inventory',  label: 'Inventario', icon: '🛒', color: 'text-blue-300',   dot: 'bg-blue-400'   }] : []),
+    ...(PERMS.canViewCosts(user.role)     ? [{ id: 'costs',      label: 'Costos',     icon: '💰', color: 'text-green-300',  dot: 'bg-green-400'  }] : []),
   ];
 
   return (
@@ -1265,40 +1273,40 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
   if (canEdit) {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pb-24">
-        {/* Header Premium */}
+        {/* Header Premium - Vintage Style */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="sticky top-0 bg-gradient-to-b from-amber-900 via-amber-800/95 to-amber-700/80 dark:from-amber-950 dark:via-amber-900/95 dark:to-amber-800/80 z-10 pt-4 pb-3 space-y-3 -mx-3 px-3 rounded-b-3xl shadow-xl"
+          className="sticky top-0 bg-gradient-to-b from-primary via-mocha to-caramel/90 dark:from-gray-900 dark:via-gray-850 dark:to-gray-800 z-10 pt-5 pb-4 space-y-4 -mx-4 px-4 rounded-b-[32px] shadow-warm backdrop-blur-sm"
         >
           <div className="flex items-center gap-3 mb-3">
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="text-3xl"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="text-4xl"
             >
-              {isBaker ? '👨‍🍳' : '👨‍⚖️'}
+              {isBaker ? '👨‍🍳' : '👑'}
             </motion.div>
             <div>
-              <p className="text-xs font-black text-amber-100 opacity-80">
-                {isBaker ? 'MODO PANADERO' : 'MODO ADMINISTRADOR'}
+              <p className="text-xs font-medium text-vanilla/70 tracking-wide">
+                {isBaker ? 'Modo Panadero' : 'Modo Administrador'}
               </p>
-              <h2 className="text-xl font-black text-amber-50 font-playfair">Gestión de Recetas</h2>
+              <h2 className="text-2xl font-bold text-vanilla font-playfair tracking-wide">Gestión de Recetas</h2>
             </div>
           </div>
 
           <div className="flex gap-3">
             <motion.input
-              whileFocus={{ scale: 1.05 }}
+              whileFocus={{ scale: 1.02 }}
               type="text"
               placeholder="🔍 Buscar receta..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 px-5 py-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border-2 border-amber-200 dark:border-amber-700 text-lg font-bold text-amber-900 dark:text-amber-100 placeholder-amber-600 dark:placeholder-amber-300 shadow-md focus:shadow-lg transition-all"
+              className="flex-1 px-5 py-4 rounded-2xl bg-white/15 backdrop-blur-sm border-2 border-peach/30 text-lg font-medium text-vanilla placeholder-vanilla/50 shadow-glass focus:shadow-warm focus:border-peach/50 transition-all"
             />
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.85 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
               onClick={() => {
                 setEditingId(null);
                 setFormData({
@@ -1309,26 +1317,26 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                 });
                 setShowForm(!showForm);
               }}
-              className="bg-gradient-to-br from-amber-700 to-amber-900 hover:from-amber-600 hover:to-amber-800 text-amber-50 p-4 rounded-2xl font-black transition-all shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-br from-peach to-caramel hover:from-caramel hover:to-peach text-primary p-4 rounded-2xl font-bold transition-all shadow-warm hover:shadow-glass-lg"
             >
-              <Plus size={28} />
+              <Plus size={26} />
             </motion.button>
           </div>
 
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {(['all', 'Panadería', 'Pastelería'] as const).map((cat, idx) => (
               <motion.button
                 key={cat}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.92 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-black whitespace-nowrap transition-all duration-300 ${
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-300 ${
                   category === cat
-                    ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-50 shadow-lg border-2 border-amber-300'
-                    : 'bg-amber-200/40 dark:bg-amber-900/40 text-amber-900 dark:text-amber-100 border-2 border-amber-300/50 dark:border-amber-700/50 hover:bg-amber-200/60 dark:hover:bg-amber-900/60'
+                    ? 'bg-gradient-to-r from-peach to-vanilla text-primary shadow-warm border border-white/30'
+                    : 'bg-white/15 backdrop-blur-sm text-vanilla/80 border border-white/20 hover:bg-white/25'
                 }`}
               >
                 {cat === 'all' ? '📚 Todas' : cat === 'Panadería' ? '🍞 Pan' : '🎂 Pastel'}
@@ -1344,65 +1352,65 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-gradient-to-br from-amber-100/50 to-amber-50/50 dark:from-amber-900/50 dark:to-amber-900/30 border-2 border-amber-300 dark:border-amber-700 rounded-3xl p-6 shadow-xl"
+              className="glass-card bg-gradient-to-br from-vanilla/90 to-wheat/80 dark:from-gray-800/90 dark:to-gray-900/80 border border-caramel/25 rounded-[28px] p-6 shadow-warm"
             >
               <form onSubmit={handleSaveRecipe} className="space-y-5">
                 <div>
-                  <label className="text-xs font-black mb-2 block text-amber-900 dark:text-amber-100">📝 NOMBRE DE RECETA</label>
+                  <label className="text-xs font-semibold mb-2 block text-primary dark:text-vanilla tracking-wide">📝 Nombre de Receta</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="text"
                     value={formData.name || ''}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 text-lg font-bold transition-all"
+                    className="w-full px-4 py-3.5 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla text-lg font-medium transition-all shadow-inner"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-black mb-2 block text-amber-900 dark:text-amber-100">📂 CATEGORÍA</label>
+                    <label className="text-xs font-semibold mb-2 block text-primary dark:text-vanilla tracking-wide">📂 Categoría</label>
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 font-bold"
+                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla font-medium"
                     >
                       <option>Panadería</option>
                       <option>Pastelería</option>
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs font-black mb-2 block text-amber-900 dark:text-amber-100">🌡️ TEMPERATURA</label>
+                    <label className="text-xs font-semibold mb-2 block text-primary dark:text-vanilla tracking-wide">🌡️ Temperatura</label>
                     <motion.input
-                      whileFocus={{ scale: 1.02 }}
+                      whileFocus={{ scale: 1.01 }}
                       type="number"
                       value={formData.temperature || 180}
                       onChange={(e) => setFormData({ ...formData, temperature: Number(e.target.value) })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 font-bold transition-all"
+                      className="w-full px-4 py-3.5 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla font-medium transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-black mb-2 block text-amber-900 dark:text-amber-100">⏱️ TIEMPO (minutos)</label>
+                  <label className="text-xs font-semibold mb-2 block text-primary dark:text-vanilla tracking-wide">⏱️ Tiempo (minutos)</label>
                   <motion.input
-                    whileFocus={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.01 }}
                     type="number"
                     value={formData.time || 30}
                     onChange={(e) => setFormData({ ...formData, time: Number(e.target.value) })}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 font-bold transition-all"
+                    className="w-full px-4 py-3.5 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla font-medium transition-all"
                   />
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-xs font-black text-amber-900 dark:text-amber-100">🥄 INGREDIENTES</label>
+                    <label className="text-xs font-semibold text-primary dark:text-vanilla tracking-wide">🥄 Ingredientes</label>
                     <motion.button
-                      whileTap={{ scale: 0.9 }}
+                      whileTap={{ scale: 0.95 }}
                       type="button"
                       onClick={addIngredient}
-                      className="text-amber-800 dark:text-amber-200 hover:text-amber-900 dark:hover:text-amber-100 text-xs font-black bg-amber-300/40 dark:bg-amber-700/40 px-3 py-1 rounded-lg transition-all border border-amber-300 dark:border-amber-700"
+                      className="text-primary dark:text-vanilla text-xs font-semibold bg-peach/40 dark:bg-caramel/30 px-4 py-1.5 rounded-xl transition-all border border-caramel/30 hover:bg-peach/60"
                     >
-                      + AÑADIR
+                      + Añadir
                     </motion.button>
                   </div>
                   <div className="space-y-2 max-h-48 overflow-y-auto">
@@ -1413,7 +1421,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                           placeholder="Ingrediente"
                           value={ing.name}
                           onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)}
-                          className="flex-1 px-3 py-2 rounded-lg border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 text-sm font-bold transition-all"
+                          className="flex-1 px-3 py-2.5 rounded-xl border-2 border-caramel/25 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla text-sm font-medium transition-all"
                         />
                         <input
                           type="number"
@@ -1421,12 +1429,12 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                           step="0.1"
                           value={ing.quantity}
                           onChange={(e) => updateIngredient(ing.id, 'quantity', Number(e.target.value))}
-                          className="w-20 px-3 py-2 rounded-lg border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 text-sm font-bold transition-all"
+                          className="w-20 px-3 py-2.5 rounded-xl border-2 border-caramel/25 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla text-sm font-medium transition-all"
                         />
                         <select
                           value={ing.unit}
                           onChange={(e) => updateIngredient(ing.id, 'unit', e.target.value)}
-                          className="px-3 py-2 rounded-lg border-2 border-amber-300 dark:border-amber-700 focus:border-amber-500 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-100 text-sm font-bold transition-all"
+                          className="px-3 py-2.5 rounded-xl border-2 border-caramel/25 focus:border-caramel bg-white/80 dark:bg-gray-800/60 dark:text-vanilla text-sm font-medium transition-all"
                         >
                           <option>g</option>
                           <option>kg</option>
@@ -1435,10 +1443,10 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                           <option>unid</option>
                         </select>
                         <motion.button
-                          whileTap={{ scale: 0.8 }}
+                          whileTap={{ scale: 0.9 }}
                           type="button"
                           onClick={() => removeIngredient(ing.id)}
-                          className="bg-red-500/30 hover:bg-red-500/50 text-red-700 dark:text-red-400 p-2 rounded-lg transition-all hover:shadow-lg"
+                          className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-blush p-2.5 rounded-xl transition-all hover:shadow-glass"
                         >
                           <Trash2 size={16} />
                         </motion.button>
@@ -1447,25 +1455,25 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-2">
+                <div className="flex gap-3 pt-2">
                   <motion.button
-                    whileTap={{ scale: 0.92 }}
-                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.02 }}
                     type="submit"
-                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-3 rounded-xl font-black transition-all text-lg shadow-md hover:shadow-lg"
+                    className="flex-1 bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-vanilla px-4 py-3.5 rounded-2xl font-semibold transition-all text-lg shadow-warm hover:shadow-glass-lg"
                   >
-                    ✅ {editingId ? 'ACTUALIZAR' : 'CREAR RECETA'}
+                    ✨ {editingId ? 'Actualizar' : 'Crear Receta'}
                   </motion.button>
                   <motion.button
-                    whileTap={{ scale: 0.92 }}
+                    whileTap={{ scale: 0.97 }}
                     type="button"
                     onClick={() => {
                       setShowForm(false);
                       setEditingId(null);
                     }}
-                    className="flex-1 bg-amber-300/40 dark:bg-amber-700/40 hover:bg-amber-400/50 dark:hover:bg-amber-600/50 text-amber-900 dark:text-amber-100 px-4 py-3 rounded-xl font-black transition-all text-lg border-2 border-amber-300 dark:border-amber-700"
+                    className="flex-1 bg-latte/60 hover:bg-latte/80 text-primary px-4 py-3.5 rounded-2xl font-semibold transition-all text-lg border border-caramel/25"
                   >
-                    ✕ CANCELAR
+                    ✕ Cancelar
                   </motion.button>
                 </div>
               </form>
@@ -1473,23 +1481,23 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
           )}
         </AnimatePresence>
 
-        {/* Recipes List - Admin View */}
-        <div className={`${isMobile ? 'grid gap-3' : 'grid grid-cols-2 lg:grid-cols-3 gap-6'}`}>
+        {/* Recipes List - Admin View - Vintage Cards */}
+        <div className={`${isMobile ? 'grid gap-4' : 'grid grid-cols-2 lg:grid-cols-3 gap-5'}`}>
           {recipes.length === 0 ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16"
+              className="text-center py-16 col-span-full"
             >
               <motion.div
-                animate={{ y: [0, -20, 0], rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-6xl mb-4"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="text-7xl mb-4"
               >
                 📖
               </motion.div>
-              <p className="font-black text-lg text-amber-900 dark:text-amber-100">No hay recetas aún</p>
-              <p className="text-xs opacity-70">{search || category !== 'all' ? 'Intenta con otro filtro' : 'Crea tu primera receta'}</p>
+              <p className="font-semibold text-lg text-primary dark:text-vanilla">No hay recetas aún</p>
+              <p className="text-sm opacity-60 text-mocha">{search || category !== 'all' ? 'Intenta con otro filtro' : 'Crea tu primera receta'}</p>
             </motion.div>
           ) : (
             recipes.map((recipe, idx) => (
@@ -1499,19 +1507,19 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(180, 83, 9, 0.2)' }}
-                className="bg-gradient-to-br from-amber-50 to-amber-100/50 dark:from-amber-900/80 dark:to-amber-950 border-2 border-amber-300 dark:border-amber-700 rounded-3xl p-6 hover:shadow-xl transition-all cursor-pointer active:scale-95 group"
+                whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(196, 149, 106, 0.25)' }}
+                className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-mocha/90 dark:to-cocoa/80 border-2 border-caramel/40 dark:border-caramel/30 rounded-3xl p-6 hover:shadow-warm transition-all cursor-pointer active:scale-95 group"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1">
-                    <h3 className="text-2xl font-black font-playfair text-amber-900 dark:text-amber-100 mb-2">
+                    <h3 className="text-2xl font-bold font-serif text-primary dark:text-vanilla mb-2">
                       {recipe.name}
                     </h3>
                     <div className="flex gap-2 flex-wrap">
-                      <span className="px-3 py-1 bg-gradient-to-r from-orange-400/40 to-amber-400/40 text-amber-900 dark:text-amber-100 text-xs rounded-full font-black border border-amber-300 dark:border-amber-700">
+                      <span className="px-3 py-1 bg-gradient-to-r from-peach/50 to-caramel/40 text-primary dark:text-vanilla text-xs rounded-full font-semibold border border-caramel/30 dark:border-caramel/40">
                         {recipe.category === 'Panadería' ? '🍞' : '🎂'} {recipe.category}
                       </span>
-                      <span className="px-3 py-1 bg-amber-200/40 dark:bg-amber-800/40 text-amber-900 dark:text-amber-100 text-xs rounded-full font-black border border-amber-300 dark:border-amber-700">
+                      <span className="px-3 py-1 bg-blush/40 dark:bg-mocha/50 text-primary dark:text-vanilla text-xs rounded-full font-semibold border border-blush/50 dark:border-caramel/30">
                         👨‍🍳 {recipe.createdBy}
                       </span>
                     </div>
@@ -1523,7 +1531,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                         e.stopPropagation();
                         handleEdit(recipe);
                       }}
-                      className="bg-blue-500/40 hover:bg-blue-500/60 text-blue-700 dark:text-blue-300 p-3 rounded-lg transition-all hover:shadow-lg"
+                      className="bg-secondary/30 hover:bg-secondary/50 text-primary dark:text-vanilla p-3 rounded-xl transition-all hover:shadow-lg border border-caramel/20"
                     >
                       <Edit2 size={20} />
                     </motion.button>
@@ -1533,7 +1541,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                         e.stopPropagation();
                         handleDelete(recipe.id);
                       }}
-                      className="bg-red-500/40 hover:bg-red-500/60 text-red-700 dark:text-red-300 p-3 rounded-lg transition-all hover:shadow-lg"
+                      className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-blush p-3 rounded-xl transition-all hover:shadow-lg border border-blush/30"
                     >
                       <Trash2 size={20} />
                     </motion.button>
@@ -1541,21 +1549,21 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 mb-4">
-                  <div className="bg-gradient-to-br from-orange-200/60 to-orange-100/40 dark:from-orange-900/40 dark:to-orange-900/20 p-3 rounded-xl border-2 border-orange-300 dark:border-orange-700">
-                    <p className="opacity-70 text-xs font-black text-orange-900 dark:text-orange-200">🥄 ING</p>
-                    <p className="font-black text-lg text-orange-800 dark:text-orange-300">{recipe.ingredients.length}</p>
+                  <div className="glass-warm bg-gradient-to-br from-peach/50 to-vanilla/40 dark:from-mocha/50 dark:to-mocha/30 p-3 rounded-xl border border-caramel/25">
+                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-vanilla">🥄 ING</p>
+                    <p className="font-bold text-lg text-primary dark:text-peach">{recipe.ingredients.length}</p>
                   </div>
-                  <div className="bg-gradient-to-br from-red-200/60 to-red-100/40 dark:from-red-900/40 dark:to-red-900/20 p-3 rounded-xl border-2 border-red-300 dark:border-red-700">
-                    <p className="opacity-70 text-xs font-black text-red-900 dark:text-red-200">🌡️ T</p>
-                    <p className="font-black text-lg text-red-800 dark:text-red-300">{recipe.temperature}°</p>
+                  <div className="glass-warm bg-gradient-to-br from-blush/50 to-vanilla/40 dark:from-mocha/50 dark:to-mocha/30 p-3 rounded-xl border border-blush/30">
+                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-vanilla">🌡️ T</p>
+                    <p className="font-bold text-lg text-primary dark:text-blush">{recipe.temperature}°</p>
                   </div>
-                  <div className="bg-gradient-to-br from-amber-200/60 to-amber-100/40 dark:from-amber-900/40 dark:to-amber-900/20 p-3 rounded-xl border-2 border-amber-300 dark:border-amber-700">
-                    <p className="opacity-70 text-xs font-black text-amber-900 dark:text-amber-200">⏱️ T</p>
-                    <p className="font-black text-lg text-amber-800 dark:text-amber-300">{recipe.time}m</p>
+                  <div className="glass-warm bg-gradient-to-br from-honey/50 to-vanilla/40 dark:from-mocha/50 dark:to-mocha/30 p-3 rounded-xl border border-honey/30">
+                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-vanilla">⏱️ T</p>
+                    <p className="font-bold text-lg text-primary dark:text-honey">{recipe.time}m</p>
                   </div>
                 </div>
 
-                <p className="text-xs text-amber-800 dark:text-amber-300 line-clamp-2 font-semibold opacity-80">
+                <p className="text-xs text-mocha dark:text-latte line-clamp-2 font-medium opacity-80">
                   {recipe.ingredients.map(ing => `${ing.name}`).join(' • ')}
                 </p>
               </motion.div>
@@ -1573,19 +1581,19 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 bg-gradient-to-b from-purple-900 via-purple-800/95 to-purple-700/80 dark:from-purple-950 dark:via-purple-900/95 dark:to-purple-800/80 z-10 pt-4 pb-3 space-y-3 -mx-3 px-3 rounded-b-3xl shadow-xl"
+        className="sticky top-0 glass-warm bg-gradient-to-b from-mocha via-primary/95 to-cinnamon/90 dark:from-cocoa dark:via-mocha/95 dark:to-primary/80 z-10 pt-4 pb-3 space-y-3 -mx-3 px-3 rounded-b-3xl shadow-warm"
       >
         <div className="flex items-center gap-3 mb-2">
           <motion.div animate={{ y: [0,-5,0] }} transition={{ duration:2, repeat:Infinity }} className="text-3xl">
             {user?.role === 'readonly' ? '👨‍👩‍👧' : '🏭'}
           </motion.div>
           <div>
-            <p className="text-xs font-black text-purple-100 opacity-80">
+            <p className="text-xs font-semibold text-vanilla/80">
               {user?.role === 'readonly' ? 'MODO FAMILIA' : 'MODO PERSONAL'}
             </p>
-            <h2 className="text-xl font-black text-purple-50 font-playfair">Recetas</h2>
+            <h2 className="text-xl font-bold text-cream font-serif">Recetas</h2>
           </div>
-          <span className="ml-auto text-xs bg-white/20 text-white/80 font-black px-3 py-1 rounded-full border border-white/30">
+          <span className="ml-auto text-xs bg-white/20 text-cream/90 font-semibold px-3 py-1 rounded-full border border-cream/30">
             👁️ Solo lectura
           </span>
         </div>
@@ -1595,7 +1603,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
           placeholder="🔍 Buscar receta..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full px-5 py-3 rounded-2xl bg-purple-50 dark:bg-purple-900/30 border-2 border-purple-200 dark:border-purple-700 text-base font-bold text-purple-900 dark:text-purple-100 placeholder-purple-400 dark:placeholder-purple-400 focus:outline-none focus:border-purple-400 transition-all"
+          className="w-full px-5 py-3 rounded-2xl bg-cream/90 dark:bg-mocha/40 border-2 border-caramel/30 dark:border-caramel/40 text-base font-medium text-primary dark:text-vanilla placeholder-mocha/60 dark:placeholder-latte/60 focus:outline-none focus:border-caramel transition-all"
         />
 
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
@@ -1603,10 +1611,10 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
             <button
               key={cat}
               onClick={() => setCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-black whitespace-nowrap transition-all ${
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-all ${
                 category === cat
-                  ? 'bg-purple-400 text-white shadow-md'
-                  : 'bg-purple-200/40 dark:bg-purple-900/40 text-purple-900 dark:text-purple-100'
+                  ? 'bg-peach text-primary shadow-md'
+                  : 'bg-cream/30 dark:bg-mocha/40 text-cream dark:text-vanilla'
               }`}
             >
               {cat === 'all' ? '📚 Todas' : cat === 'Panadería' ? '🍞 Pan' : '🎂 Pastel'}
@@ -1620,7 +1628,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
         {recipes.length === 0 ? (
           <div className="col-span-full text-center py-16">
             <p className="text-4xl mb-3">🔍</p>
-            <p className="font-black text-lg">Sin resultados</p>
+            <p className="font-semibold text-lg text-mocha">Sin resultados</p>
           </div>
         ) : (
           recipes.map((recipe, idx) => (
@@ -1629,27 +1637,27 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
               initial={{ opacity:0, x:-20, scale:0.95 }}
               animate={{ opacity:1, x:0, scale:1 }}
               transition={{ delay: idx * 0.05 }}
-              whileHover={{ x:4, boxShadow:'0 12px 28px rgba(109,40,217,0.12)' }}
-              className="bg-gradient-to-br from-purple-50 to-amber-50/60 dark:from-purple-900/40 dark:to-amber-950/60 border-2 border-purple-200 dark:border-purple-800 rounded-3xl p-5 transition-all"
+              whileHover={{ x:4, boxShadow:'0 12px 28px rgba(196, 149, 106, 0.2)' }}
+              className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/85 dark:from-mocha/50 dark:to-cocoa/60 border-2 border-caramel/30 dark:border-caramel/40 rounded-3xl p-5 transition-all"
             >
-              <h3 className="text-xl font-black font-playfair text-purple-900 dark:text-purple-100 mb-2">{recipe.name}</h3>
-              <span className="px-3 py-1 bg-amber-300/40 text-amber-900 dark:text-amber-200 text-xs rounded-full font-black border border-amber-300/50 inline-block mb-3">
+              <h3 className="text-xl font-bold font-serif text-primary dark:text-vanilla mb-2">{recipe.name}</h3>
+              <span className="px-3 py-1 bg-peach/50 text-primary dark:text-vanilla text-xs rounded-full font-semibold border border-caramel/30 inline-block mb-3">
                 {recipe.category === 'Panadería' ? '🍞' : '🎂'} {recipe.category}
               </span>
               <div className="grid grid-cols-2 gap-2 mb-3">
-                <div className="bg-orange-100/60 dark:bg-orange-900/30 p-2 rounded-xl text-center border border-orange-200 dark:border-orange-800">
-                  <p className="text-[10px] font-black opacity-60">🌡️ TEMP</p>
-                  <p className="font-black text-lg text-orange-800 dark:text-orange-300">{recipe.temperature}°</p>
+                <div className="glass-warm bg-blush/40 dark:bg-mocha/40 p-2 rounded-xl text-center border border-blush/40 dark:border-caramel/30">
+                  <p className="text-[10px] font-semibold text-primary/70 dark:text-vanilla/70">🌡️ TEMP</p>
+                  <p className="font-bold text-lg text-primary dark:text-blush">{recipe.temperature}°</p>
                 </div>
-                <div className="bg-amber-100/60 dark:bg-amber-900/30 p-2 rounded-xl text-center border border-amber-200 dark:border-amber-800">
-                  <p className="text-[10px] font-black opacity-60">⏱️ TIEMPO</p>
-                  <p className="font-black text-lg text-amber-800 dark:text-amber-300">{recipe.time}m</p>
+                <div className="glass-warm bg-honey/40 dark:bg-mocha/40 p-2 rounded-xl text-center border border-honey/40 dark:border-caramel/30">
+                  <p className="text-[10px] font-semibold text-primary/70 dark:text-vanilla/70">⏱️ TIEMPO</p>
+                  <p className="font-bold text-lg text-primary dark:text-honey">{recipe.time}m</p>
                 </div>
               </div>
-              <div className="bg-white/50 dark:bg-gray-800/40 rounded-2xl p-3 max-h-48 overflow-y-auto border border-purple-100 dark:border-purple-900">
-                <p className="text-[10px] font-black opacity-60 mb-1">🥄 INGREDIENTES ({recipe.ingredients.length})</p>
+              <div className="glass bg-cream/60 dark:bg-mocha/30 rounded-2xl p-3 max-h-48 overflow-y-auto border border-caramel/20 dark:border-caramel/30">
+                <p className="text-[10px] font-semibold text-primary/70 dark:text-vanilla/70 mb-1">🥄 INGREDIENTES ({recipe.ingredients.length})</p>
                 {recipe.ingredients.map((ing) => (
-                  <p key={ing.id} className="text-sm font-bold text-purple-800 dark:text-purple-200">
+                  <p key={ing.id} className="text-sm font-medium text-primary dark:text-vanilla">
                     • {ing.name} <span className="text-xs opacity-60">{ing.quantity}{ing.unit}</span>
                   </p>
                 ))}
@@ -1733,7 +1741,7 @@ const CalculatorView: React.FC = () => {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pb-24">
       <div className="space-y-3">
-        <label className="block text-lg font-black">📖 SELECCIONA UNA RECETA</label>
+        <label className="block text-lg font-bold text-primary dark:text-vanilla">📖 Selecciona una Receta</label>
         <select
           value={selectedRecipeId || ''}
           onChange={(e) => {
@@ -1741,7 +1749,7 @@ const CalculatorView: React.FC = () => {
             setScaledRecipe(null);
             setProductQuantity(1);
           }}
-          className="w-full px-4 py-3 rounded-2xl border-2 border-secondary/30 focus:border-secondary bg-white dark:bg-gray-800 dark:border-gray-700 text-lg font-bold"
+          className="w-full px-4 py-3 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
         >
           <option value="">-- Elige una receta --</option>
           {state.recipes.map((r) => (
@@ -1758,10 +1766,10 @@ const CalculatorView: React.FC = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setScaleType('quantity')}
-              className={`p-3 rounded-2xl font-black transition text-lg ${
+              className={`p-3 rounded-2xl font-semibold transition text-lg ${
                 scaleType === 'quantity'
-                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-                  : 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-gray-200'
+                  ? 'bg-gradient-to-r from-primary to-mocha text-cream shadow-warm'
+                  : 'glass-warm bg-wheat/60 dark:bg-mocha/40 text-primary dark:text-vanilla border border-caramel/20'
               }`}
             >
               🍞 Unidades
@@ -1769,10 +1777,10 @@ const CalculatorView: React.FC = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setScaleType('ingredient')}
-              className={`p-3 rounded-2xl font-black transition text-lg ${
+              className={`p-3 rounded-2xl font-semibold transition text-lg ${
                 scaleType === 'ingredient'
-                  ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg'
-                  : 'bg-gray-200 dark:bg-gray-800 text-primary dark:text-gray-200'
+                  ? 'bg-gradient-to-r from-primary to-mocha text-cream shadow-warm'
+                  : 'glass-warm bg-wheat/60 dark:bg-mocha/40 text-primary dark:text-vanilla border border-caramel/20'
               }`}
             >
               🥄 Ingrediente
@@ -1782,11 +1790,11 @@ const CalculatorView: React.FC = () => {
           {scaleType === 'ingredient' && (
             <>
               <div>
-                <label className="text-sm font-bold mb-2 block">🥄 Ingrediente base</label>
+                <label className="text-sm font-semibold mb-2 block text-primary dark:text-vanilla">🥄 Ingrediente base</label>
                 <select
                   value={baseIngredientId || ''}
                   onChange={(e) => setBaseIngredientId(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border-2 border-secondary/30 focus:border-secondary bg-white dark:bg-gray-800 dark:border-gray-700 text-lg font-bold mb-3"
+                  className="w-full px-4 py-3 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla mb-3"
                 >
                   <option value="">-- Selecciona --</option>
                   {selectedRecipe.ingredients.map((ing) => (
@@ -1798,13 +1806,13 @@ const CalculatorView: React.FC = () => {
               </div>
               {baseIngredientId && (
                 <div>
-                  <label className="text-sm font-bold mb-2 block">🎯 Cantidad nueva</label>
+                  <label className="text-sm font-semibold mb-2 block text-primary dark:text-vanilla">🎯 Cantidad nueva</label>
                   <input
                     type="number"
                     placeholder="Ej: 500"
                     value={baseValue || ''}
                     onChange={(e) => setBaseValue(Number(e.target.value))}
-                    className="w-full px-4 py-3 rounded-2xl border-2 border-secondary/30 focus:border-secondary bg-white dark:bg-gray-800 dark:border-gray-700 text-lg font-bold"
+                    className="w-full px-4 py-3 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                   />
                 </div>
               )}
@@ -1813,7 +1821,7 @@ const CalculatorView: React.FC = () => {
 
           {scaleType === 'quantity' && (
             <div>
-              <label className="text-sm font-bold mb-2 block">🍞 ¿CUÁNTOS {selectedRecipe.category === 'Panadería' ? 'PANES' : 'PASTELES'} QUIERES HACER?</label>
+              <label className="text-sm font-semibold mb-2 block text-primary dark:text-vanilla">🍞 ¿Cuántos {selectedRecipe.category === 'Panadería' ? 'panes' : 'pasteles'} quieres hacer?</label>
               <input
                 type="number"
                 min="1"
@@ -1821,9 +1829,9 @@ const CalculatorView: React.FC = () => {
                 placeholder="Ej: 5"
                 value={productQuantity || 1}
                 onChange={(e) => setProductQuantity(Math.max(1, Number(e.target.value)))}
-                className="w-full px-4 py-3 rounded-2xl border-2 border-secondary/30 focus:border-secondary bg-white dark:bg-gray-800 dark:border-gray-700 text-lg font-bold"
+                className="w-full px-4 py-3 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
               />
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs text-mocha/70 dark:text-latte/70 mt-2">
                 📏 Masa para 1: {calculateTotalMass(selectedRecipe).toFixed(0)} g | Para {productQuantity}: {(calculateTotalMass(selectedRecipe) * productQuantity).toFixed(0)} g
               </p>
             </div>
@@ -1832,9 +1840,9 @@ const CalculatorView: React.FC = () => {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={handleScale}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-4 rounded-2xl font-black transition disabled:opacity-50 text-lg shadow-lg"
+            className="w-full bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-cream px-6 py-4 rounded-2xl font-semibold transition disabled:opacity-50 text-lg shadow-warm"
           >
-            ⚡ ESCALAR RECETA
+            ⚡ Escalar Receta
           </motion.button>
         </>
       )}
@@ -1844,32 +1852,32 @@ const CalculatorView: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           id="recipe-export"
-          className="bg-gradient-to-br from-orange-50 to-orange-100/50 dark:from-gray-900 dark:to-gray-950 border-2 border-orange-300 dark:border-orange-700 rounded-2xl p-6"
+          className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-mocha/80 dark:to-cocoa/90 border-2 border-caramel/40 dark:border-caramel/30 rounded-2xl p-6"
         >
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-black font-playfair">{scaledRecipe.name}</h2>
-            <p className="text-sm font-bold text-orange-700 dark:text-orange-400">🔢 {scaleType === 'quantity' ? `${productQuantity} UNIDADES` : `Escalada ${scale.toFixed(2)}x`}</p>
+            <h2 className="text-2xl font-bold font-serif text-primary dark:text-vanilla">{scaledRecipe.name}</h2>
+            <p className="text-sm font-semibold text-secondary dark:text-peach">🔢 {scaleType === 'quantity' ? `${productQuantity} unidades` : `Escalada ${scale.toFixed(2)}x`}</p>
           </div>
 
           <div className="space-y-3 mb-4">
-            <h3 className="font-black text-lg">🥄 INGREDIENTES:</h3>
+            <h3 className="font-bold text-lg text-primary dark:text-vanilla">🥄 Ingredientes:</h3>
             {scaledRecipe.ingredients.map((ing) => (
-              <div key={ing.id} className="flex justify-between items-center pb-2 border-b border-orange-200 dark:border-orange-800">
-                <span className="font-bold">{ing.name}</span>
-                <span className="font-mono font-black text-lg text-orange-700 dark:text-orange-400">
+              <div key={ing.id} className="flex justify-between items-center pb-2 border-b border-caramel/30 dark:border-caramel/40">
+                <span className="font-medium text-primary dark:text-vanilla">{ing.name}</span>
+                <span className="font-mono font-bold text-lg text-secondary dark:text-peach">
                   {ing.quantity.toFixed(2)} {ing.unit}
                 </span>
               </div>
             ))}
-            <div className="bg-white/60 dark:bg-gray-800/60 p-3 rounded-xl border-2 border-orange-300 dark:border-orange-700 mt-4">
-              <p className="font-black text-orange-800 dark:text-orange-200">📏 MASA TOTAL: {(calculateTotalMass(scaledRecipe)).toFixed(0)} g</p>
+            <div className="glass-warm bg-cream/70 dark:bg-mocha/50 p-3 rounded-xl border border-caramel/30 mt-4">
+              <p className="font-bold text-primary dark:text-vanilla">📏 Masa Total: {(calculateTotalMass(scaledRecipe)).toFixed(0)} g</p>
             </div>
           </div>
 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={exportImage}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-3 rounded-2xl font-black transition flex items-center justify-center gap-2 text-lg shadow-lg"
+            className="w-full bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-cream px-6 py-3 rounded-2xl font-semibold transition flex items-center justify-center gap-2 text-lg shadow-warm"
           >
             <Download size={20} />
             📥 DESCARGAR PNG
@@ -1963,18 +1971,18 @@ const InventoryView: React.FC = () => {
             setFormData({ type: 'kg' });
             setShowForm(!showForm);
           }}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-2xl font-bold transition flex items-center justify-center gap-2 text-lg"
+          className="w-full bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-cream px-6 py-4 rounded-2xl font-semibold transition flex items-center justify-center gap-2 text-lg shadow-warm"
         >
           <Plus size={24} />
-          ➕ NUEVO INSUMO
+          ➕ Nuevo Insumo
         </motion.button>
       )}
       {!canEdit && (
-        <div className="flex items-center gap-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-4">
+        <div className="flex items-center gap-3 glass-warm bg-vanilla/80 dark:bg-mocha/40 border border-caramel/30 dark:border-caramel/40 rounded-2xl p-4">
           <span className="text-2xl">👁️</span>
           <div>
-            <p className="font-black text-blue-800 dark:text-blue-200 text-sm">Vista de Inventario</p>
-            <p className="text-xs text-blue-600 dark:text-blue-400">Puedes consultar los insumos y sus costos</p>
+            <p className="font-semibold text-primary dark:text-vanilla text-sm">Vista de Inventario</p>
+            <p className="text-xs text-mocha dark:text-latte">Puedes consultar los insumos y sus costos</p>
           </div>
         </div>
       )}
@@ -1985,27 +1993,27 @@ const InventoryView: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="bg-blue-100 dark:bg-blue-900/30 border-2 border-blue-300 dark:border-blue-700 rounded-2xl p-4"
+            className="glass-card bg-gradient-to-br from-vanilla/90 to-wheat/80 dark:from-mocha/60 dark:to-cocoa/70 border-2 border-caramel/30 dark:border-caramel/40 rounded-2xl p-4"
           >
             <form onSubmit={handleSave} className="space-y-3">
               <div>
-                <label className="text-xs font-bold mb-1 block">📝 Nombre</label>
+                <label className="text-xs font-semibold mb-1 block text-primary dark:text-vanilla">📝 Nombre</label>
                 <input
                   type="text"
                   value={formData.name || ''}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 bg-white dark:bg-gray-900 dark:border-gray-700 text-lg font-bold"
+                  className="w-full px-3 py-2 rounded-xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                   placeholder="Ej: Harina Premium"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-xs font-bold mb-1 block">📊 Tipo</label>
+                  <label className="text-xs font-semibold mb-1 block text-primary dark:text-vanilla">📊 Tipo</label>
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-                    className="w-full px-3 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 bg-white dark:bg-gray-900 dark:border-gray-700 text-lg font-bold"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                   >
                     <option value="kg">kg</option>
                     <option value="L">L</option>
@@ -2013,13 +2021,13 @@ const InventoryView: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-bold mb-1 block">⚖️ Peso/Presentación</label>
+                  <label className="text-xs font-semibold mb-1 block text-primary dark:text-vanilla">⚖️ Peso/Presentación</label>
                   <input
                     type="number"
                     step="0.1"
                     value={formData.presentationWeight || ''}
                     onChange={(e) => setFormData({ ...formData, presentationWeight: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 bg-white dark:bg-gray-900 dark:border-gray-700 text-lg font-bold"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                     placeholder="1"
                   />
                 </div>
@@ -2027,23 +2035,23 @@ const InventoryView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-xs font-bold mb-1 block">📦 Unidades</label>
+                  <label className="text-xs font-semibold mb-1 block text-primary dark:text-vanilla">📦 Unidades</label>
                   <input
                     type="number"
                     value={formData.unitsPurchased || ''}
                     onChange={(e) => setFormData({ ...formData, unitsPurchased: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 bg-white dark:bg-gray-900 dark:border-gray-700 text-lg font-bold"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                     placeholder="10"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold mb-1 block">💰 Costo Total</label>
+                  <label className="text-xs font-semibold mb-1 block text-primary dark:text-vanilla">💰 Costo Total</label>
                   <input
                     type="number"
                     step="100"
                     value={formData.totalCost || ''}
                     onChange={(e) => setFormData({ ...formData, totalCost: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 bg-white dark:bg-gray-900 dark:border-gray-700 text-lg font-bold"
+                    className="w-full px-3 py-2 rounded-xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
                     placeholder="100000"
                   />
                 </div>
@@ -2053,9 +2061,9 @@ const InventoryView: React.FC = () => {
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-bold transition text-lg"
+                  className="flex-1 bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-cream px-4 py-2 rounded-xl font-semibold transition text-lg shadow-warm"
                 >
-                  ✅ {editingId ? 'ACTUALIZAR' : 'CREAR'}
+                  ✅ {editingId ? 'Actualizar' : 'Crear'}
                 </motion.button>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
@@ -2064,9 +2072,9 @@ const InventoryView: React.FC = () => {
                     setShowForm(false);
                     setEditingId(null);
                   }}
-                  className="flex-1 bg-gray-400/20 hover:bg-gray-400/40 text-primary dark:text-gray-200 px-4 py-2 rounded-xl font-bold transition text-lg"
+                  className="flex-1 bg-latte/40 hover:bg-latte/60 text-primary dark:text-vanilla px-4 py-2 rounded-xl font-semibold transition text-lg"
                 >
-                  ✕ CANCELAR
+                  ✕ Cancelar
                 </motion.button>
               </div>
             </form>
@@ -2076,9 +2084,9 @@ const InventoryView: React.FC = () => {
 
       <div className="space-y-3">
         {state.operations.length === 0 ? (
-          <motion.div className="text-center py-12 text-gray-500">
+          <motion.div className="text-center py-12 text-mocha dark:text-latte">
             <div className="text-6xl mb-3">🛒</div>
-            <p className="font-bold">Inventario vacío</p>
+            <p className="font-semibold">Inventario vacío</p>
             <p className="text-xs opacity-70">Agrega insumos para gestionar costos</p>
           </motion.div>
         ) : (
@@ -2090,12 +2098,12 @@ const InventoryView: React.FC = () => {
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white dark:bg-gray-800 border-2 border-blue-300/30 dark:border-gray-700 rounded-2xl p-4"
+                className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-mocha/70 dark:to-cocoa/80 border-2 border-caramel/30 dark:border-caramel/40 rounded-2xl p-4"
               >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <h3 className="text-lg font-bold">{op.name}</h3>
-                    <p className="text-xs text-gray-500">
+                    <h3 className="text-lg font-bold text-primary dark:text-vanilla">{op.name}</h3>
+                    <p className="text-xs text-mocha/70 dark:text-latte/70">
                       {op.presentationWeight}{op.type} × {op.unitsPurchased}
                     </p>
                   </div>
@@ -2105,14 +2113,14 @@ const InventoryView: React.FC = () => {
                         <motion.button
                           whileTap={{ scale: 0.9 }}
                           onClick={() => handleEdit(op)}
-                          className="bg-blue-500/20 hover:bg-blue-500/40 text-blue-600 p-2 rounded-lg transition"
+                          className="bg-secondary/30 hover:bg-secondary/50 text-primary dark:text-vanilla p-2 rounded-xl transition border border-caramel/20"
                         >
                           <Edit2 size={16} />
                         </motion.button>
                         <motion.button
                           whileTap={{ scale: 0.9 }}
                           onClick={() => handleDelete(op.id)}
-                          className="bg-red-500/20 hover:bg-red-500/40 text-red-600 p-2 rounded-lg transition"
+                          className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-blush p-2 rounded-xl transition border border-blush/30"
                         >
                           <Trash2 size={16} />
                         </motion.button>
@@ -2122,17 +2130,17 @@ const InventoryView: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 text-xs">
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                    <p className="text-blue-700 dark:text-blue-300 font-bold">$ / g</p>
-                    <p className="font-bold text-lg">{formatCurrency(costs.perGram)}</p>
+                  <div className="glass-warm bg-peach/40 dark:bg-mocha/40 p-2 rounded-xl border border-caramel/25">
+                    <p className="text-primary dark:text-peach font-semibold">$ / g</p>
+                    <p className="font-bold text-lg text-primary dark:text-vanilla">{formatCurrency(costs.perGram)}</p>
                   </div>
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                    <p className="text-blue-700 dark:text-blue-300 font-bold">$ / 100g</p>
-                    <p className="font-bold text-lg">{formatCurrency(costs.per100g)}</p>
+                  <div className="glass-warm bg-honey/40 dark:bg-mocha/40 p-2 rounded-xl border border-honey/30">
+                    <p className="text-primary dark:text-honey font-semibold">$ / 100g</p>
+                    <p className="font-bold text-lg text-primary dark:text-vanilla">{formatCurrency(costs.per100g)}</p>
                   </div>
-                  <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                    <p className="text-blue-700 dark:text-blue-300 font-bold">$ / kg</p>
-                    <p className="font-bold text-lg">{formatCurrency(costs.perKg)}</p>
+                  <div className="glass-warm bg-blush/40 dark:bg-mocha/40 p-2 rounded-xl border border-blush/30">
+                    <p className="text-primary dark:text-blush font-semibold">$ / kg</p>
+                    <p className="font-bold text-lg text-primary dark:text-vanilla">{formatCurrency(costs.perKg)}</p>
                   </div>
                 </div>
               </motion.div>
@@ -2219,14 +2227,14 @@ const CostsView: React.FC = () => {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 pb-24">
       <div>
-        <label className="text-sm font-bold mb-2 block">📖 Selecciona receta</label>
+        <label className="text-sm font-semibold mb-2 block text-primary dark:text-vanilla">📖 Selecciona receta</label>
         <select
           value={selectedRecipeId || ''}
           onChange={(e) => {
             setSelectedRecipeId(e.target.value);
             setCosts(null);
           }}
-          className="w-full px-4 py-3 rounded-2xl border-2 border-secondary/30 focus:border-secondary bg-white dark:bg-gray-800 dark:border-gray-700 text-lg font-bold"
+          className="w-full px-4 py-3 rounded-2xl border-2 border-caramel/30 focus:border-caramel bg-cream/90 dark:bg-mocha/40 dark:border-caramel/40 text-lg font-medium text-primary dark:text-vanilla"
         >
           <option value="">-- Elige una receta --</option>
           {state.recipes.map((r) => (
@@ -2241,8 +2249,8 @@ const CostsView: React.FC = () => {
         <>
           <div>
             <div className="flex justify-between items-center mb-3">
-              <label className="text-sm font-bold">💰 Margen Ganancia:</label>
-              <span className="text-2xl font-bold text-secondary">{margin}%</span>
+              <label className="text-sm font-semibold text-primary dark:text-vanilla">💰 Margen Ganancia:</label>
+              <span className="text-2xl font-bold text-secondary dark:text-peach">{margin}%</span>
             </div>
             <input
               type="range"
@@ -2250,16 +2258,16 @@ const CostsView: React.FC = () => {
               max="100"
               value={margin}
               onChange={(e) => setMargin(Number(e.target.value))}
-              className="w-full h-3 bg-secondary/20 rounded-lg appearance-none cursor-pointer"
+              className="w-full h-3 bg-caramel/20 rounded-lg appearance-none cursor-pointer accent-secondary"
             />
           </div>
 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={calculateCosts}
-            className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-2xl font-bold transition text-lg"
+            className="w-full bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary text-cream px-6 py-4 rounded-2xl font-semibold transition text-lg shadow-warm"
           >
-            📊 CALCULAR COSTOS
+            📊 Calcular Costos
           </motion.button>
         </>
       )}
@@ -2271,42 +2279,42 @@ const CostsView: React.FC = () => {
           className="space-y-4"
         >
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-red-100 dark:bg-red-900/30 border-2 border-red-300 dark:border-red-700 rounded-2xl p-4 text-center">
-              <p className="text-xs text-red-700 dark:text-red-300 font-bold">Costo Ingredientes</p>
-              <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+            <div className="glass-warm bg-blush/50 dark:bg-mocha/50 border-2 border-blush/40 dark:border-blush/30 rounded-2xl p-4 text-center">
+              <p className="text-xs text-primary dark:text-blush font-semibold">Costo Ingredientes</p>
+              <p className="text-2xl font-bold text-primary dark:text-vanilla">
                 {formatCurrency(costs.totalCost)}
               </p>
             </div>
 
-            <div className="bg-green-100 dark:bg-green-900/30 border-2 border-green-300 dark:border-green-700 rounded-2xl p-4 text-center">
-              <p className="text-xs text-green-700 dark:text-green-300 font-bold">Precio Sugerido</p>
-              <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+            <div className="glass-warm bg-honey/50 dark:bg-mocha/50 border-2 border-honey/40 dark:border-honey/30 rounded-2xl p-4 text-center">
+              <p className="text-xs text-primary dark:text-honey font-semibold">Precio Sugerido</p>
+              <p className="text-2xl font-bold text-primary dark:text-vanilla">
                 {formatCurrency(costs.suggestedPrice)}
               </p>
             </div>
           </div>
 
-          <div className="bg-blue-100 dark:bg-blue-900/30 border-2 border-blue-300 dark:border-blue-700 rounded-2xl p-4 text-center">
-            <p className="text-xs text-blue-700 dark:text-blue-300 font-bold">💰 Ganancia Estimada</p>
-            <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+          <div className="glass-warm bg-peach/50 dark:bg-mocha/50 border-2 border-peach/40 dark:border-peach/30 rounded-2xl p-4 text-center">
+            <p className="text-xs text-primary dark:text-peach font-semibold">💰 Ganancia Estimada</p>
+            <p className="text-3xl font-bold text-primary dark:text-vanilla">
               {formatCurrency(costs.profit)}
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 border-2 border-secondary/20 rounded-2xl p-4">
-            <h3 className="font-bold text-lg mb-3">📊 Distribución de Costos</h3>
+          <div className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-mocha/70 dark:to-cocoa/80 border-2 border-caramel/30 dark:border-caramel/40 rounded-2xl p-4">
+            <h3 className="font-bold text-lg mb-3 text-primary dark:text-vanilla">📊 Distribución de Costos</h3>
             <div className="space-y-3">
               {costDistribution.map((item) => (
                 <div key={item.name}>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="font-bold text-sm">{item.name}</span>
-                    <span className="text-sm font-bold text-secondary">{item.percentage.toFixed(1)}%</span>
+                    <span className="font-medium text-sm text-primary dark:text-vanilla">{item.name}</span>
+                    <span className="text-sm font-semibold text-secondary dark:text-peach">{item.percentage.toFixed(1)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-cream dark:bg-mocha/60 rounded-full h-3 overflow-hidden border border-caramel/20">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${item.percentage}%` }}
-                      className="h-full bg-gradient-to-r from-secondary to-secondary/80"
+                      className="h-full bg-gradient-to-r from-secondary to-caramel"
                       transition={{ duration: 0.6, ease: 'easeOut' }}
                     />
                   </div>
@@ -2348,11 +2356,11 @@ const DesktopSidebar: React.FC<{
   onLogout: () => void;
 }> = ({ user, currentView, onViewChange, onLogout }) => {
   const navItems = [
-    { id: 'home',       label: 'Inicio',      icon: '🏠', activeColor: 'from-purple-500 to-purple-600',  border: 'border-purple-400' },
-    { id: 'recipes',    label: 'Recetas',     icon: '📖', activeColor: 'from-orange-500 to-orange-600',  border: 'border-orange-400' },
-    ...(PERMS.canUseCalculator(user.role) ? [{ id: 'calculator', label: 'Calculadora', icon: '🧮', activeColor: 'from-yellow-500 to-yellow-600', border: 'border-yellow-400' }] : []),
-    ...(PERMS.canViewInventory(user.role) ? [{ id: 'inventory', label: 'Inventario',  icon: '🛒', activeColor: 'from-blue-500 to-blue-600',   border: 'border-blue-400'   }] : []),
-    ...(PERMS.canViewCosts(user.role)     ? [{ id: 'costs',     label: 'Costos',      icon: '💰', activeColor: 'from-green-500 to-green-600', border: 'border-green-400'  }] : []),
+    { id: 'home',       label: 'Inicio',      icon: '🏠', activeColor: 'from-peach to-blush',  border: 'border-peach' },
+    { id: 'recipes',    label: 'Recetas',     icon: '📖', activeColor: 'from-caramel to-secondary',  border: 'border-caramel' },
+    ...(PERMS.canUseCalculator(user.role) ? [{ id: 'calculator', label: 'Calculadora', icon: '🧮', activeColor: 'from-honey to-caramel', border: 'border-honey' }] : []),
+    ...(PERMS.canViewInventory(user.role) ? [{ id: 'inventory', label: 'Inventario',  icon: '🛒', activeColor: 'from-wheat to-latte',   border: 'border-wheat'   }] : []),
+    ...(PERMS.canViewCosts(user.role)     ? [{ id: 'costs',     label: 'Costos',      icon: '💰', activeColor: 'from-vanilla to-wheat', border: 'border-vanilla'  }] : []),
   ];
 
   const roleInfo = ROLE_INFO[user.role];
@@ -2363,37 +2371,37 @@ const DesktopSidebar: React.FC<{
     <motion.div
       initial={{ x: -300 }}
       animate={{ x: 0 }}
-      className="fixed left-0 top-0 h-screen w-72 bg-gradient-to-b from-primary via-primary/97 to-primary/90 dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 border-r-2 border-secondary/30 shadow-2xl z-50 flex flex-col"
+      className="fixed left-0 top-0 h-screen w-72 bg-gradient-to-b from-primary via-mocha to-primary dark:from-gray-900 dark:via-gray-900 dark:to-gray-950 border-r border-caramel/20 shadow-warm z-50 flex flex-col"
     >
       {/* App Logo */}
-      <div className="px-6 pt-6 pb-4 border-b border-white/10">
+      <div className="px-6 pt-7 pb-5 border-b border-caramel/15">
         <div className="flex items-center gap-3 mb-1">
           <motion.span
-            animate={{ rotate:[0,360] }}
-            transition={{ duration:10, repeat:Infinity, ease:'linear' }}
-            className="text-3xl"
-          >🍞</motion.span>
+            animate={{ y:[0,-5,0] }}
+            transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}
+            className="text-4xl"
+          >🥐</motion.span>
           <div>
-            <h1 className="text-lg font-black font-playfair text-cream leading-none">CALIPAN VIRREY</h1>
-            <p className="text-[10px] text-secondary/70 font-bold tracking-widest">PANADERÍA PREMIUM</p>
+            <h1 className="text-lg font-bold font-playfair text-vanilla leading-none tracking-wide">Calipan Virrey</h1>
+            <p className="text-[10px] text-peach/60 font-medium tracking-[0.2em] uppercase">Panadería Artesanal</p>
           </div>
         </div>
       </div>
 
       {/* User Profile Card */}
-      <div className="px-4 py-3 mx-3 mt-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur flex items-center gap-3">
-        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-secondary to-secondary/60 flex items-center justify-center text-cream text-sm font-black shadow-lg flex-shrink-0">
+      <div className="px-4 py-3 mx-3 mt-4 rounded-2xl glass-warm border border-white/10 flex items-center gap-3">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-caramel to-secondary flex items-center justify-center text-flour text-sm font-bold shadow-warm flex-shrink-0">
           {initials}
         </div>
         <div className="min-w-0">
-          <p className="text-cream font-black text-sm truncate">{user.username}</p>
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${roleInfo.badge}`}>{roleInfo.emoji} {roleInfo.label}</span>
+          <p className="text-vanilla font-semibold text-sm truncate">{user.username}</p>
+          <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-vanilla/80`}>{roleInfo.emoji} {roleInfo.label}</span>
         </div>
       </div>
 
       {/* Nav Items */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-        <p className="text-cream/30 text-[10px] font-black tracking-widest uppercase px-3 mb-2">Navegación</p>
+      <nav className="flex-1 px-3 py-5 space-y-1.5 overflow-y-auto">
+        <p className="text-vanilla/30 text-[10px] font-semibold tracking-[0.2em] uppercase px-3 mb-3">Navegación</p>
         {navItems.map((item, idx) => {
           const active = currentView === item.id;
           return (
@@ -2403,41 +2411,41 @@ const DesktopSidebar: React.FC<{
               animate={{ opacity:1, x:0 }}
               transition={{ delay: idx * 0.07 }}
               whileHover={{ x: active ? 0 : 6 }}
-              whileTap={{ scale: 0.96 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => onViewChange(item.id)}
-              className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-3 group relative overflow-hidden ${
+              className={`w-full text-left px-4 py-3.5 rounded-2xl transition-all duration-300 flex items-center gap-3 group relative overflow-hidden ${
                 active
-                  ? `bg-gradient-to-r ${item.activeColor} text-white shadow-lg border-l-4 ${item.border}`
-                  : 'text-cream/60 hover:text-cream hover:bg-white/10 border-l-4 border-transparent'
+                  ? `bg-gradient-to-r ${item.activeColor} text-primary shadow-warm border-l-4 ${item.border}`
+                  : 'text-vanilla/60 hover:text-vanilla hover:bg-white/8 border-l-4 border-transparent'
               }`}
             >
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute inset-0 bg-white/10 rounded-xl pointer-events-none"
+                  className="absolute inset-0 bg-white/10 rounded-2xl pointer-events-none"
                   transition={{ type:'spring', stiffness:400, damping:30 }}
                 />
               )}
               <span className="text-xl relative z-10">{item.icon}</span>
-              <span className="font-black text-sm relative z-10">{item.label}</span>
-              {active && <motion.div animate={{ scale:[1,1.5,1] }} transition={{ duration:1.5,repeat:Infinity }} className="ml-auto w-2 h-2 bg-white/70 rounded-full relative z-10" />}
+              <span className="font-semibold text-sm relative z-10">{item.label}</span>
+              {active && <motion.div animate={{ scale:[1,1.4,1] }} transition={{ duration:2,repeat:Infinity }} className="ml-auto w-2 h-2 bg-primary/40 rounded-full relative z-10" />}
             </motion.button>
           );
         })}
       </nav>
 
       {/* Bottom: logout + version */}
-      <div className="px-3 pb-4 border-t border-white/10 pt-3 space-y-2">
+      <div className="px-3 pb-5 border-t border-caramel/15 pt-4 space-y-3">
         <motion.button
-          whileHover={{ scale:1.03 }}
-          whileTap={{ scale:0.95 }}
+          whileHover={{ scale:1.02 }}
+          whileTap={{ scale:0.97 }}
           onClick={onLogout}
-          className="w-full bg-red-500/20 hover:bg-red-500/40 text-red-200 px-4 py-3 rounded-xl flex items-center justify-center gap-2 font-black text-sm transition-all border border-red-500/30"
+          className="w-full bg-blush/20 hover:bg-blush/30 text-blush px-4 py-3 rounded-2xl flex items-center justify-center gap-2 font-semibold text-sm transition-all border border-blush/20"
         >
           <LogOut size={18} />
-          CERRAR SESIÓN
+          Cerrar Sesión
         </motion.button>
-        <p className="text-center text-cream/20 text-[10px] font-bold">v1.0.0 Beta · BakeControl © 2026</p>
+        <p className="text-center text-vanilla/20 text-[10px] font-medium">v1.0.0 · Calipan Virrey © 2026</p>
       </div>
     </motion.div>
   );
@@ -2495,7 +2503,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cream dark:bg-gray-950">
+    <div className="min-h-screen bg-gradient-to-br from-cream via-vanilla to-wheat dark:from-gray-950 dark:via-cocoa dark:to-mocha">
       {/* Desktop Layout */}
       {!isMobile && (
         <>
@@ -2509,13 +2517,13 @@ const App: React.FC = () => {
             }}
           />
           {/* Desktop top header */}
-          <header className="fixed top-0 left-72 right-0 h-14 bg-cream/80 dark:bg-gray-950/80 backdrop-blur border-b border-black/10 flex items-center px-8 z-40">
-            <div className="flex items-center gap-2 text-primary dark:text-cream font-black text-sm">
+          <header className="fixed top-0 left-72 right-0 h-14 glass-warm bg-gradient-to-r from-vanilla/90 to-wheat/85 dark:from-mocha/80 dark:to-cocoa/70 backdrop-blur border-b border-caramel/20 flex items-center px-8 z-40">
+            <div className="flex items-center gap-2 text-primary dark:text-vanilla font-semibold text-sm">
               {['home','recipes','calculator','inventory','costs'].includes(currentView) && (
                 <span className="capitalize">{currentView === 'home' ? '🏠 Inicio' : currentView === 'recipes' ? '📖 Recetas' : currentView === 'calculator' ? '🧮 Calculadora' : currentView === 'inventory' ? '🛒 Inventario' : '💰 Costos'}</span>
               )}
             </div>
-            <div className="ml-auto text-xs text-primary/40 dark:text-cream/30 font-bold">CALIPAN VIRREY · {new Date().toLocaleDateString('es-CR',{weekday:'long',day:'numeric',month:'short'})}</div>
+            <div className="ml-auto text-xs text-mocha/60 dark:text-latte/50 font-medium">CALIPAN VIRREY · {new Date().toLocaleDateString('es-CR',{weekday:'long',day:'numeric',month:'short'})}</div>
           </header>
           <main className="ml-72 pt-14 p-8">
             <motion.div

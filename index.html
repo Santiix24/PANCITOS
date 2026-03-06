@@ -3,39 +3,516 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-    <meta name="theme-color" content="#4A3728" />
-    <meta name="description" content="PWA para gestión de recetas y costos - CALIPAN VIRREY Panadería" />
+    <meta name="theme-color" content="#5B3A29" />
+    <meta name="description" content="PWA para gestión de recetas y costos - CALIPAN VIRREY Panadería Artesanal" />
     <meta name="application-name" content="CALIPAN VIRREY" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="CALIPAN VIRREY" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-TileColor" content="#4A3728" />
+    <meta name="msapplication-TileColor" content="#6B4423" />
     
     <link rel="manifest" href="/manifest.json" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <title>CALIPAN VIRREY - Panadería</title>
+    <title>CALIPAN VIRREY - Panadería Artesanal</title>
     <style>
-      * { font-family: 'Inter', sans-serif; }
-      h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
-      
-      .glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+      /* ========== TIPOGRAFÍA VINTAGE AESTHETIC ========== */
+      * { 
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       
+      h1, h2, h3, h4, h5, h6 { 
+        font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+        letter-spacing: 0.02em;
+      }
+      
+      .font-vintage { font-family: 'Cormorant Garamond', serif; }
+      .font-elegant { font-family: 'Playfair Display', serif; }
+
+      /* ========== TEXTURA SUTIL DE PAPEL/HARINA ========== */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.015;
+        pointer-events: none;
+        z-index: 9999;
+      }
+
+      /* ========== GLASSMORPHISM PANADERÍA ========== */
+      .glass {
+        background: rgba(255, 249, 242, 0.78);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border: 1px solid rgba(139, 90, 43, 0.1);
+        box-shadow: 
+          0 8px 32px rgba(91, 58, 41, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .glass-warm {
+        background: rgba(255, 250, 245, 0.85);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(212, 165, 116, 0.25);
+        box-shadow: 
+          0 10px 40px rgba(139, 90, 43, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      .glass-blush {
+        background: rgba(232, 180, 160, 0.25);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border: 1px solid rgba(194, 102, 45, 0.2);
+        box-shadow: 0 8px 32px rgba(160, 82, 45, 0.1);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px) saturate(160%);
+        -webkit-backdrop-filter: blur(16px) saturate(160%);
+        border: 1px solid rgba(212, 165, 116, 0.15);
+        box-shadow: 
+          0 4px 24px rgba(91, 58, 41, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+
+      .glass-dark {
+        background: linear-gradient(145deg, rgba(91, 58, 41, 0.95) 0%, rgba(62, 39, 35, 0.98) 100%);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid rgba(218, 165, 32, 0.25);
+        box-shadow: 
+          0 10px 40px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .glass-honey {
+        background: rgba(218, 165, 32, 0.12);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border: 1px solid rgba(218, 165, 32, 0.3);
+        box-shadow: 0 8px 32px rgba(218, 165, 32, 0.15);
+      }
+
+      .glass-bread {
+        background: rgba(139, 90, 43, 0.08);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border: 1px solid rgba(139, 90, 43, 0.2);
+        box-shadow: 0 8px 32px rgba(139, 90, 43, 0.1);
+      }
+
+      .glass-cinnamon {
+        background: rgba(139, 69, 19, 0.1);
+        backdrop-filter: blur(20px) saturate(170%);
+        -webkit-backdrop-filter: blur(20px) saturate(170%);
+        border: 1px solid rgba(139, 69, 19, 0.25);
+        box-shadow: 0 8px 32px rgba(139, 69, 19, 0.12);
+      }
+
+      /* ========== BOTONES PANADERÍA ========== */
+      .btn-vintage {
+        background: linear-gradient(135deg, #DAA520 0%, #D4A574 100%);
+        border: none;
+        box-shadow: 
+          0 4px 16px rgba(218, 165, 32, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        transition: all 0.25s ease;
+        color: #3E2723;
+        font-weight: 600;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-vintage:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 6px 24px rgba(218, 165, 32, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        background: linear-gradient(135deg, #E8B32A 0%, #DAA520 100%);
+      }
+
+      .btn-primary-vintage {
+        background: linear-gradient(135deg, #5B3A29 0%, #8B5A2B 100%);
+        border: none;
+        box-shadow: 
+          0 4px 20px rgba(91, 58, 41, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        color: #FFF9F2;
+        font-weight: 600;
+      }
+
+      .btn-primary-vintage:hover {
+        background: linear-gradient(135deg, #8B5A2B 0%, #A0522D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 28px rgba(91, 58, 41, 0.45);
+      }
+
+      .btn-accent {
+        background: linear-gradient(135deg, #C2662D 0%, #A0522D 100%);
+        border: none;
+        box-shadow: 0 4px 16px rgba(194, 102, 45, 0.35);
+        color: #FFFFFF;
+        font-weight: 600;
+      }
+
+      .btn-accent:hover {
+        background: linear-gradient(135deg, #D4732E 0%, #C2662D 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(194, 102, 45, 0.45);
+      }
+
+      .btn-cinnamon {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        border: none;
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.35);
+        color: #FFF9F2;
+        font-weight: 600;
+      }
+
+      /* ========== INPUTS PANADERÍA ========== */
+      .input-vintage {
+        background: rgba(255, 255, 255, 0.92);
+        border: 2px solid rgba(139, 90, 43, 0.15);
+        color: #4A3728;
+        transition: all 0.25s ease;
+      }
+
+      .input-vintage::placeholder {
+        color: #8B7355;
+      }
+
+      .input-vintage:focus {
+        border-color: #D4A574;
+        box-shadow: 0 0 0 4px rgba(212, 165, 116, 0.2);
+        outline: none;
+      }
+
+      /* ========== ANIMACIONES SUAVES ========== */
       @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
-      
+
+      @keyframes gentleFloat {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+      }
+
+      @keyframes warmGlow {
+        0%, 100% { box-shadow: 0 0 20px rgba(196, 149, 106, 0.2); }
+        50% { box-shadow: 0 0 30px rgba(212, 165, 116, 0.3); }
+      }
+
+      @keyframes subtlePulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+      }
+
       .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+      .float-gentle { animation: gentleFloat 3s ease-in-out infinite; }
+      .glow-warm { animation: warmGlow 2s ease-in-out infinite; }
+
+      /* ========== SCROLLBAR ELEGANTE ========== */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: rgba(240, 228, 215, 0.5);
+        border-radius: 8px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #D4A574 0%, #A0522D 100%);
+        border-radius: 8px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #DAA520 0%, #8B5A2B 100%);
+      }
+
+      /* ========== TARJETAS PANADERÍA ========== */
+      .card-vintage {
+        background: linear-gradient(145deg, #FFFFFF 0%, #FFF9F2 100%);
+        border: 1px solid rgba(139, 90, 43, 0.12);
+        border-radius: 20px;
+        box-shadow: 
+          0 4px 24px rgba(91, 58, 41, 0.08),
+          0 1px 3px rgba(139, 90, 43, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        transition: all 0.25s ease;
+      }
+
+      .card-vintage:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 12px 40px rgba(91, 58, 41, 0.12),
+          0 4px 12px rgba(139, 90, 43, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 1);
+        border-color: rgba(218, 165, 32, 0.3);
+      }
+
+      .card-bread {
+        background: linear-gradient(145deg, #FFF5E6 0%, #F5E6D3 100%);
+        border: 1px solid rgba(212, 165, 116, 0.25);
+        border-radius: 20px;
+        box-shadow: 0 4px 16px rgba(139, 90, 43, 0.1);
+      }
+
+      /* ========== GRADIENTES PANADERÍA ========== */
+      .bg-vintage-gradient {
+        background: linear-gradient(145deg, #FFF9F2 0%, #FFF5E6 50%, #F5E6D3 100%);
+      }
+
+      .bg-bread-warm {
+        background: linear-gradient(145deg, #5B3A29 0%, #8B5A2B 50%, #A0522D 100%);
+      }
+
+      .bg-honey-glow {
+        background: linear-gradient(145deg, #DAA520 0%, #D4A574 50%, #F4A460 100%);
+      }
+
+      .bg-accent-warm {
+        background: linear-gradient(135deg, #C2662D 0%, #A0522D 100%);
+      }
+
+      .bg-bakery-morning {
+        background: linear-gradient(135deg, #FFF9F2 0%, #FFFACD 25%, #FFF5E6 50%, #F5E6D3 100%);
+      }
+
+      /* ========== RESPONSIVE - GLASSMORPHISM MÓVIL MEJORADO ========== */
+      @media (max-width: 768px) {
+        .glass {
+          background: rgba(255, 249, 242, 0.88);
+          backdrop-filter: blur(12px) saturate(150%);
+          -webkit-backdrop-filter: blur(12px) saturate(150%);
+          border: 1px solid rgba(139, 90, 43, 0.12);
+        }
+        
+        .glass-warm {
+          background: rgba(255, 250, 245, 0.92);
+          backdrop-filter: blur(14px) saturate(155%);
+          -webkit-backdrop-filter: blur(14px) saturate(155%);
+        }
+        
+        .glass-blush, .glass-card {
+          backdrop-filter: blur(10px) saturate(140%);
+          -webkit-backdrop-filter: blur(10px) saturate(140%);
+        }
+
+        .glass-honey, .glass-bread {
+          backdrop-filter: blur(12px) saturate(150%);
+          -webkit-backdrop-filter: blur(12px) saturate(150%);
+        }
+
+        .card-vintage {
+          border-radius: 16px;
+          box-shadow: 0 2px 16px rgba(91, 58, 41, 0.1);
+        }
+
+        /* Fallback para dispositivos sin soporte backdrop-filter */
+        @supports not (backdrop-filter: blur(10px)) {
+          .glass { background: rgba(255, 249, 242, 0.96); }
+          .glass-warm { background: rgba(255, 250, 245, 0.97); }
+          .glass-card { background: rgba(255, 255, 255, 0.97); }
+        }
+      }
+
+      /* ========== DARK MODE - ESTILO iOS MODERNO ========== */
+      @media (prefers-color-scheme: dark) {
+        /* Fondo base - gris oscuro elegante */
+        body {
+          background-color: #000000;
+          background-image: none;
+        }
+
+        body::before {
+          opacity: 0;
+        }
+        
+        /* Glassmorphism iOS dark */
+        .glass {
+          background: rgba(28, 28, 30, 0.8);
+          border-color: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-warm {
+          background: rgba(44, 44, 46, 0.85);
+          border-color: rgba(255, 255, 255, 0.1);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-card {
+          background: rgba(44, 44, 46, 0.9);
+          border-color: rgba(255, 255, 255, 0.08);
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .glass-honey {
+          background: rgba(44, 44, 46, 0.85);
+          border-color: rgba(255, 204, 0, 0.2);
+        }
+
+        .glass-bread {
+          background: rgba(44, 44, 46, 0.85);
+          border-color: rgba(255, 159, 10, 0.15);
+        }
+
+        .glass-blush {
+          background: rgba(44, 44, 46, 0.85);
+          border-color: rgba(255, 149, 128, 0.15);
+        }
+
+        /* Tarjetas iOS dark */
+        .card-vintage {
+          background: rgba(28, 28, 30, 1);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-vintage:hover {
+          border-color: rgba(255, 204, 0, 0.25);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-bread {
+          background: rgba(44, 44, 46, 1);
+          border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Botones iOS dark - colores vibrantes */
+        .btn-vintage {
+          background: linear-gradient(180deg, #FFD60A 0%, #FFCC00 100%);
+          color: #000000;
+          box-shadow: 0 2px 12px rgba(255, 204, 0, 0.3);
+          text-shadow: none;
+        }
+
+        .btn-vintage:hover {
+          box-shadow: 0 4px 20px rgba(255, 204, 0, 0.45);
+        }
+
+        .btn-primary-vintage {
+          background: linear-gradient(180deg, #FF9F0A 0%, #FF8C00 100%);
+          color: #FFFFFF;
+          box-shadow: 0 2px 12px rgba(255, 159, 10, 0.3);
+        }
+
+        .btn-accent {
+          background: linear-gradient(180deg, #FF6B35 0%, #FF5722 100%);
+          color: #FFFFFF;
+          box-shadow: 0 2px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Inputs iOS dark */
+        .input-vintage {
+          background: rgba(44, 44, 46, 1);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: #FFFFFF;
+        }
+
+        .input-vintage::placeholder {
+          color: rgba(255, 255, 255, 0.35);
+        }
+
+        .input-vintage:focus {
+          border-color: #FFCC00;
+          box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.15);
+          background: rgba(58, 58, 60, 1);
+        }
+
+        /* Gradientes dark */
+        .bg-vintage-gradient {
+          background: linear-gradient(180deg, #1C1C1E 0%, #000000 100%);
+        }
+
+        .bg-bakery-morning {
+          background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 50%, #3A3A3C 100%);
+        }
+
+        .bg-bread-warm {
+          background: linear-gradient(135deg, #FF9F0A 0%, #FF6B35 100%);
+        }
+
+        .bg-honey-glow {
+          background: linear-gradient(135deg, #FFD60A 0%, #FFCC00 100%);
+        }
+
+        /* Scrollbar iOS dark */
+        ::-webkit-scrollbar-track {
+          background: #1C1C1E;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Text colors */
+        .text-primary {
+          color: #FFFFFF;
+        }
+      }
+
+      /* ========== DARK MODE MÓVIL - iOS ========== */
+      @media (prefers-color-scheme: dark) and (max-width: 768px) {
+        .glass {
+          background: rgba(28, 28, 30, 0.92);
+          backdrop-filter: blur(30px) saturate(180%);
+          -webkit-backdrop-filter: blur(30px) saturate(180%);
+        }
+
+        .glass-warm {
+          background: rgba(44, 44, 46, 0.94);
+          backdrop-filter: blur(30px) saturate(180%);
+          -webkit-backdrop-filter: blur(30px) saturate(180%);
+        }
+
+        .card-vintage {
+          border-radius: 12px;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @supports not (backdrop-filter: blur(10px)) {
+          .glass { background: rgba(28, 28, 30, 0.98); }
+          .glass-warm { background: rgba(44, 44, 46, 0.98); }
+        }
+      }
+
+      /* ========== MOBILE NAVBAR - EFECTO iOS CRISTAL ========== */
+      .mobile-nav-glass {
+        background: rgba(249, 249, 249, 0.94);
+        backdrop-filter: blur(50px) saturate(180%);
+        -webkit-backdrop-filter: blur(50px) saturate(180%);
+        border-top: 0.33px solid rgba(60, 60, 67, 0.18);
+      }
+
+      /* Dark mode navbar - iOS style */
+      @media (prefers-color-scheme: dark) {
+        .mobile-nav-glass {
+          background: rgba(29, 29, 31, 0.94);
+          border-top: 0.33px solid rgba(255, 255, 255, 0.1);
+        }
+      }
     </style>
   </head>
-  <body class="bg-cream dark:bg-gray-950 text-primary dark:text-gray-100 overflow-x-hidden">
+  <body class="bg-cream text-primary overflow-x-hidden">
     <div id="root"></div>
     
     <script type="module" src="/src/index.tsx"></script>
@@ -43,6 +520,12 @@
     <script>
       // ====== SERVICE WORKER REGISTRATION - MEJORADO PARA OFFLINE ======
       if ('serviceWorker' in navigator) {
+        // En desarrollo, desregistrar el SW para evitar caché vieja
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+          navigator.serviceWorker.getRegistrations().then(regs => {
+            regs.forEach(r => r.unregister());
+          });
+        } else {
         window.addEventListener('load', async () => {
           try {
             console.log('🔧 Iniciando registro de Service Worker...');
@@ -96,6 +579,7 @@
         window.addEventListener('offline', () => {
           console.log('📴 Modo offline - usando cache');
         });
+        } // fin else producción
       }
       
       document.addEventListener('touchmove', (e) => {
