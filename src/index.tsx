@@ -995,9 +995,27 @@ const ROLE_INFO: Record<User['role'], { label: string; badge: string; emoji: str
 };
 
 // ============================================================================
-// LOGO ANIMADO — cicla entre productos de panadería, cambia en cada login
+// LOGO ANIMADO — cambia aleatoriamente en cada refresh y cada login
 // ============================================================================
-const LOGO_EMOJIS = ['🍞', '🥐', '🥖', '🧁', '🎂', '🍩', '🥨', '🫓', '🍰', '🧇'];
+const LOGO_EMOJIS = [
+  '🍞', '🥐', '🥖', '🧁', '🎂', '🍩', '🥨', '🫓',
+  '🍰', '🧇', '🍮', '🍪', '🍫', '🍯', '🥞', '🍳',
+  '🧄', '🍬', '🍡', '🫐', '🥜', '🍦', '🍧', '🍨',
+];
+
+const _pickRandomLogo = (exclude?: number): number => {
+  let next = Math.floor(Math.random() * LOGO_EMOJIS.length);
+  if (exclude !== undefined && LOGO_EMOJIS.length > 1) {
+    while (next === exclude) next = Math.floor(Math.random() * LOGO_EMOJIS.length);
+  }
+  return next;
+};
+
+// En cada refresh elegimos un aleatorio y lo guardamos
+(() => {
+  const next = _pickRandomLogo();
+  localStorage.setItem('pancitos-logo-idx', String(next));
+})();
 
 const LogoEmoji: React.FC<{ className?: string }> = ({ className = 'text-6xl' }) => {
   const idx = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10) % LOGO_EMOJIS.length;
@@ -4839,7 +4857,7 @@ const App: React.FC = () => {
   if (!state.user) {
     return <LoginPage onLogin={(user, remember) => {
       const curr = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10);
-      localStorage.setItem('pancitos-logo-idx', String((curr + 1) % LOGO_EMOJIS.length));
+      localStorage.setItem('pancitos-logo-idx', String(_pickRandomLogo(curr)));
       state.setUser(user);
       if (remember) state.setRememberMe(true);
     }} />;
