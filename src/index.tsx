@@ -1000,28 +1000,18 @@ const ROLE_INFO: Record<User['role'], { label: string; badge: string; emoji: str
 const LOGO_EMOJIS = ['🍞', '🥐', '🥖', '🧁', '🎂', '🍩', '🥨', '🫓', '🍰', '🧇'];
 
 const LogoEmoji: React.FC<{ className?: string }> = ({ className = 'text-6xl' }) => {
-  const [idx, setIdx] = React.useState(() => {
-    const stored = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10);
-    return stored % LOGO_EMOJIS.length;
-  });
-  React.useEffect(() => {
-    const t = setInterval(() => setIdx(p => (p + 1) % LOGO_EMOJIS.length), 2500);
-    return () => clearInterval(t);
-  }, []);
+  const idx = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10) % LOGO_EMOJIS.length;
   return (
-    <AnimatePresence mode="wait">
-      <motion.span
-        key={idx}
-        initial={{ opacity: 0, scale: 0.4, rotate: -15 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        exit={{ opacity: 0, scale: 0.4, rotate: 15 }}
-        transition={{ duration: 0.3, type: 'spring', stiffness: 250, damping: 18 }}
-        className={`inline-block ${className}`}
-        style={{ display: 'inline-block' }}
-      >
-        {LOGO_EMOJIS[idx]}
-      </motion.span>
-    </AnimatePresence>
+    <motion.span
+      key={idx}
+      initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ duration: 0.4, type: 'spring', stiffness: 220, damping: 16 }}
+      className={`inline-block ${className}`}
+      style={{ display: 'inline-block' }}
+    >
+      {LOGO_EMOJIS[idx]}
+    </motion.span>
   );
 };
 
