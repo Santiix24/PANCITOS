@@ -1197,7 +1197,7 @@ const LoginPage: React.FC<{
         >
           <div className="text-center mb-6 sm:mb-8">
             <motion.div animate={{ y:[0, -10, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="text-6xl sm:text-8xl inline-block mb-3 sm:mb-4 drop-shadow-2xl">🥐</motion.div>
+              className="text-6xl sm:text-8xl inline-block mb-3 sm:mb-4 drop-shadow-2xl">🍞🥐</motion.div>
             <h1 className="text-3xl sm:text-4xl font-bold font-playfair text-vanilla mb-1.5 sm:mb-2 tracking-wide">PANCITOS</h1>
             <p className="text-peach/80 text-xs sm:text-sm font-medium tracking-[0.2em] sm:tracking-[0.25em] uppercase">Panadería Artesanal</p>
             <span className="inline-block mt-2 sm:mt-3 px-3 sm:px-4 py-0.5 sm:py-1 rounded-full bg-honey/20 border border-honey/30 text-honey text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase">v1.0.0 · Premium</span>
@@ -1233,7 +1233,7 @@ const LoginPage: React.FC<{
               animate={{ y:[0, -15, 0], rotate:[0, 3, -3, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               className="text-[140px] leading-none mb-10 drop-shadow-2xl"
-            >🥐</motion.div>
+            >🍞🥐</motion.div>
 
             <h1 className="text-7xl font-bold font-playfair text-vanilla mb-4 leading-tight tracking-wide">
               PANCITOS
@@ -1323,7 +1323,7 @@ const HomePage: React.FC<{
         </div>
         
         <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5">
-          <motion.div animate={{ y:[0,-10,0] }} transition={{ duration:3, repeat:Infinity, ease: 'easeInOut' }} className="text-5xl sm:text-7xl lg:text-8xl">🥐</motion.div>
+          <motion.div animate={{ y:[0,-10,0] }} transition={{ duration:3, repeat:Infinity, ease: 'easeInOut' }} className="text-5xl sm:text-7xl lg:text-8xl">🍞🥐</motion.div>
           <div className="text-center sm:text-left">
             <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold font-playfair text-vanilla mb-2 sm:mb-3">¡Hola, {user.username}!</h2>
             <p className="text-peach/70 text-xs sm:text-sm mb-3 sm:mb-4 font-medium">Bienvenido de vuelta a tu panel de control</p>
@@ -4686,7 +4686,7 @@ const DesktopSidebar: React.FC<{
             animate={{ y:[0,-5,0] }}
             transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}
             className="text-4xl"
-          >🥐</motion.span>
+          >🍞🥐</motion.span>
           <div>
             <h1 className="text-lg font-bold font-playfair text-vanilla dark:text-white leading-none tracking-wide">PANCITOS</h1>
             <p className="text-[10px] text-peach/60 dark:text-amber-500/60 font-medium tracking-[0.2em] uppercase">Panadería Artesanal</p>
