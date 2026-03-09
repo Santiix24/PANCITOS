@@ -1419,7 +1419,8 @@ const useDarkMode = () => {
         const saved = localStorage.getItem('pancitos-dark-mode');
         if (saved !== null)
             return saved === 'true';
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Primera vez: siempre modo claro
+        return false;
     });
     useEffect(() => {
         document.documentElement.classList.toggle('dark', isDark);

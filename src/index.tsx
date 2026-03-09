@@ -3662,7 +3662,8 @@ const useDarkMode = (): [boolean, () => void] => {
   const [isDark, setIsDark] = useState(() => {
     const saved = localStorage.getItem('pancitos-dark-mode');
     if (saved !== null) return saved === 'true';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Primera vez: siempre modo claro
+    return false;
   });
 
   useEffect(() => {
