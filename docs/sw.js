@@ -1,11 +1,11 @@
-const CACHE_NAME = 'calipan-virrey-v3';
+const CACHE_NAME = 'pancitos-v4';
 const URLS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/PANCITOS/',
+  '/PANCITOS/index.html',
+  '/PANCITOS/manifest.json',
 ];
 
-console.log('🔧 Service Worker v3 cargado');
+console.log('🔧 Service Worker v4 - PANCITOS cargado');
 
 // Instalar Service Worker - Cachear todo lo necesario
 self.addEventListener('install', (event) => {
