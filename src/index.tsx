@@ -60,6 +60,7 @@ interface State {
   recipes: Recipe[];
   operations: Operation[];
   rememberMe: boolean;
+  defaultMargin: number; // Margen de ganancia por defecto (%)
   
   setUser: (user: User | null) => void;
   addRecipe: (recipe: Recipe) => void;
@@ -69,6 +70,7 @@ interface State {
   updateOperation: (id: string, op: Operation) => void;
   deleteOperation: (id: string) => void;
   setRememberMe: (value: boolean) => void;
+  setDefaultMargin: (margin: number) => void;
 }
 
 // ============================================================================
@@ -547,6 +549,10 @@ const useStore = (() => {
             return op;
           });
         }
+        // Migrar defaultMargin si no existe
+        if (parsed.defaultMargin === undefined || parsed.defaultMargin === null) {
+          parsed.defaultMargin = 40;
+        }
         return parsed;
       }
     } catch (error) {
@@ -558,6 +564,7 @@ const useStore = (() => {
       recipes: defaultRecipes,
       operations: defaultOperations,
       rememberMe: false,
+      defaultMargin: 40,
       setUser: () => {},
       addRecipe: () => {},
       updateRecipe: () => {},
@@ -566,6 +573,7 @@ const useStore = (() => {
       updateOperation: () => {},
       deleteOperation: () => {},
       setRememberMe: () => {},
+      setDefaultMargin: () => {},
     };
   };
 
@@ -576,6 +584,7 @@ const useStore = (() => {
         recipes: state.recipes,
         operations: state.operations,
         rememberMe: state.rememberMe,
+        defaultMargin: state.defaultMargin,
       };
       localStorage.setItem('pancitos-state', JSON.stringify(toSave));
     } catch (error) {
@@ -628,6 +637,11 @@ const useStore = (() => {
     },
     setRememberMe: (value) => {
       state.rememberMe = value;
+      saveToStorage();
+      notifyListeners();
+    },
+    setDefaultMargin: (margin) => {
+      state.defaultMargin = margin;
       saveToStorage();
       notifyListeners();
     },
@@ -2684,7 +2698,7 @@ const CostsView: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'analysis' | 'simulator' | 'reports'>('dashboard');
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
   // Variables del simulador (solo se usan en esa pestaña)
-  const [simMargin, setSimMargin] = useState(40);
+  const [simMargin, setSimMargin] = useState(state.defaultMargin || 40);
   const [simQuantity, setSimQuantity] = useState(10);
   const [simRecipeId, setSimRecipeId] = useState<string | null>(null);
 
@@ -2738,8 +2752,8 @@ const CostsView: React.FC = () => {
     const mostExpensive = sortedByCost.slice(0, 3);
     const cheapest = [...recipeCosts].sort((a, b) => a.totalCost - b.totalCost).slice(0, 3);
 
-    // Margen de ganancia predeterminado (40%)
-    const defaultMargin = 40;
+    // Margen de ganancia desde configuración del usuario
+    const defaultMargin = state.defaultMargin || 40;
 
     // Agregar ganancia a cada receta
     const recipeCostsWithProfit = recipeCosts.map(r => ({
@@ -2797,7 +2811,7 @@ const CostsView: React.FC = () => {
       categoryStats,
       totalRecipes: state.recipes.length,
     };
-  }, [state.operations, state.recipes]);
+  }, [state.operations, state.recipes, state.defaultMargin]);
 
   // Cálculo detallado de receta seleccionada (solo costos base)
   const selectedRecipeAnalysis = React.useMemo(() => {
@@ -3026,6 +3040,63 @@ const CostsView: React.FC = () => {
                 <p className="text-white/80 text-xs mb-1">📈 Costo Máximo</p>
                 <p className="text-2xl font-bold text-white">{formatCOP(globalStats.maxCost)}</p>
                 <p className="text-white/60 text-xs mt-1">Receta más costosa</p>
+              </div>
+            </div>
+          </div>
+
+          {/* ⚙️ Configuración del Margen de Ganancia */}
+          <div className="glass-warm bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800/80 dark:to-slate-900/70 rounded-2xl p-5 border-2 border-slate-200/50 dark:border-slate-700/40">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">⚙️</span>
+              <div>
+                <h3 className="font-bold text-primary dark:text-vanilla text-lg">Configuración del Margen</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Ajusta el porcentaje de ganancia para todos los cálculos</p>
+              </div>
+            </div>
+            
+            <div className="bg-blue-50/80 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-xl p-4 mb-4">
+              <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-2">💡 ¿Qué es el margen de ganancia?</p>
+              <p className="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
+                El <strong>margen de ganancia</strong> es el porcentaje que agregas sobre el costo de producción para obtener tu precio de venta.
+                Por ejemplo, si tu pan cuesta <strong>$1,000</strong> producirlo y usas un margen del <strong>40%</strong>, 
+                el precio sugerido sería <strong>$1,400</strong> (ganancia de $400).
+                <br /><br />
+                <span className="text-blue-600 dark:text-blue-400">📌 Recomendaciones típicas:</span>
+                <br />• <strong>30-40%</strong>: Productos básicos (pan tradicional, bollos)
+                <br />• <strong>50-70%</strong>: Pastelería y productos especiales
+                <br />• <strong>80-100%+</strong>: Productos artesanales premium o personalizados
+              </p>
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <div className="flex-1 w-full">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-semibold text-primary dark:text-vanilla">📈 Margen Predeterminado:</label>
+                  <span className="text-2xl font-bold text-green-600 dark:text-green-400">{state.defaultMargin}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="200"
+                  value={state.defaultMargin}
+                  onChange={(e) => state.setDefaultMargin(Number(e.target.value))}
+                  className="w-full h-3 bg-gradient-to-r from-red-200 via-yellow-200 to-green-200 dark:from-red-800 dark:via-yellow-800 dark:to-green-800 rounded-lg appearance-none cursor-pointer accent-green-600"
+                />
+                <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  <span>0%</span>
+                  <span>50%</span>
+                  <span>100%</span>
+                  <span>150%</span>
+                  <span>200%</span>
+                </div>
+              </div>
+              
+              <div className="flex-shrink-0 bg-green-100 dark:bg-green-900/40 border-2 border-green-300 dark:border-green-600 rounded-xl px-6 py-3 text-center">
+                <p className="text-xs text-green-700 dark:text-green-300 font-medium">Precio de ejemplo</p>
+                <p className="text-sm text-green-600 dark:text-green-400">Costo: $10,000</p>
+                <p className="text-lg font-bold text-green-700 dark:text-green-200">
+                  Venta: {formatCOP(10000 * (1 + state.defaultMargin / 100))}
+                </p>
               </div>
             </div>
           </div>
