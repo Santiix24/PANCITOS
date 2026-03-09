@@ -1918,7 +1918,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
         </AnimatePresence>
 
         {/* Recipes List - Admin View - Vintage Cards */}
-        <div className={`${isMobile ? 'grid gap-3 sm:gap-4 sm:grid-cols-2' : 'grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 lg:gap-5'}`}>
+        <div className={`${isMobile ? 'flex flex-col gap-3' : 'grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4 lg:gap-5'}`}>
           {recipes.length === 0 ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -1940,76 +1940,79 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
               <motion.div
                 key={recipe.id}
                 layout
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(196, 149, 106, 0.25)' }}
-                className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-[#1A1A1A]/95 dark:to-[#0D0D0D]/90 border-2 border-caramel/40 dark:border-amber-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:shadow-warm transition-all cursor-pointer active:scale-95 group"
+                whileHover={{ y: isMobile ? 0 : -4, boxShadow: isMobile ? undefined : '0 20px 40px rgba(196, 149, 106, 0.25)' }}
+                className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-[#1A1A1A]/95 dark:to-[#0D0D0D]/90 border-2 border-caramel/40 dark:border-amber-500/30 rounded-2xl sm:rounded-3xl overflow-hidden hover:shadow-warm transition-all"
               >
-                <div className="flex justify-between items-start mb-3 sm:mb-4">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg sm:text-2xl font-bold font-serif text-primary dark:text-white mb-1.5 sm:mb-2 truncate">
+                {/* Card Body */}
+                <div className="p-4 sm:p-5">
+                  {/* Header: nombre + badges */}
+                  <div className="mb-3">
+                    <h3 className="text-base sm:text-xl font-bold font-serif text-primary dark:text-white mb-2 leading-snug line-clamp-2">
                       {recipe.name}
                     </h3>
-                    <div className="flex gap-1.5 sm:gap-2 flex-wrap">
-                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gradient-to-r from-peach/50 to-caramel/40 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-caramel/30 dark:border-amber-500/40">
+                    <div className="flex gap-1.5 flex-wrap">
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-gradient-to-r from-peach/50 to-caramel/40 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-caramel/30 dark:border-amber-500/40 whitespace-nowrap">
                         {recipe.category === 'Panadería' ? '🍞' : '🎂'} {recipe.category}
                       </span>
-                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blush/40 dark:bg-[#141414]/70 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-blush/50 dark:border-amber-500/30 truncate max-w-[130px] sm:max-w-none">
-                        👨‍🍳 {recipe.createdBy}
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blush/40 dark:bg-[#141414]/70 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-blush/50 dark:border-amber-500/30 whitespace-nowrap max-w-[120px] overflow-hidden">
+                        <span className="truncate">👨‍🍳 {recipe.createdBy}</span>
                       </span>
                     </div>
                   </div>
-                  <div className="flex gap-1.5 sm:gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all">
-                    <motion.button
-                      whileTap={{ scale: 0.8 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(recipe);
-                      }}
-                      className="bg-secondary/30 hover:bg-secondary/50 text-primary dark:text-white p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-caramel/20"
-                    >
-                      <Edit2 size={16} className="sm:w-5 sm:h-5" />
-                    </motion.button>
-                    <motion.button
-                      whileTap={{ scale: 0.8 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(recipe.id);
-                      }}
-                      className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-amber-200 p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-blush/30"
-                    >
-                      <Trash2 size={16} className="sm:w-5 sm:h-5" />
-                    </motion.button>
+
+                  {/* Stats grid */}
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-3">
+                    <div className="glass-warm bg-gradient-to-br from-peach/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-caramel/25 text-center">
+                      <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">🥄 ING</p>
+                      <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-400">{recipe.ingredients.length}</p>
+                    </div>
+                    <div className="glass-warm bg-gradient-to-br from-blush/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-blush/30 text-center">
+                      <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">🌡️ T</p>
+                      <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-200">{recipe.temperature}°</p>
+                    </div>
+                    <div className="glass-warm bg-gradient-to-br from-honey/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-honey/30 text-center">
+                      <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">⏱️ T</p>
+                      <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-300">{recipe.time}m</p>
+                    </div>
+                  </div>
+
+                  {/* Ingredientes - chips con límite */}
+                  <div className="flex flex-wrap gap-1 min-h-[24px]">
+                    {recipe.ingredients.slice(0, 4).map((ing) => (
+                      <span key={ing.id} className="inline-block bg-caramel/15 dark:bg-amber-900/30 text-mocha dark:text-amber-200 text-[10px] sm:text-xs px-2 py-0.5 rounded-full border border-caramel/20 dark:border-amber-700/30 whitespace-nowrap font-medium">
+                        {ing.name}
+                      </span>
+                    ))}
+                    {recipe.ingredients.length > 4 && (
+                      <span className="inline-block bg-mocha/10 dark:bg-amber-800/20 text-mocha/60 dark:text-amber-400/70 text-[10px] sm:text-xs px-2 py-0.5 rounded-full border border-caramel/15 dark:border-amber-700/20 whitespace-nowrap">
+                        +{recipe.ingredients.length - 4} más
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  <div className="glass-warm bg-gradient-to-br from-peach/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-caramel/25">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">🥄 ING</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-400">{recipe.ingredients.length}</p>
-                  </div>
-                  <div className="glass-warm bg-gradient-to-br from-blush/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-blush/30">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">🌡️ T</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-200">{recipe.temperature}°</p>
-                  </div>
-                  <div className="glass-warm bg-gradient-to-br from-honey/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-honey/30">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">⏱️ T</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-300">{recipe.time}m</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {recipe.ingredients.slice(0, 4).map((ing) => (
-                    <span key={ing.id} className="inline-flex items-center text-[10px] px-1.5 py-0.5 bg-caramel/20 dark:bg-amber-800/30 text-primary/75 dark:text-amber-200/80 rounded-md font-medium max-w-[90px] truncate">
-                      {ing.name}
-                    </span>
-                  ))}
-                  {recipe.ingredients.length > 4 && (
-                    <span className="text-[10px] px-1.5 py-0.5 bg-primary/10 dark:bg-white/10 text-primary/60 dark:text-white/50 rounded-md font-medium whitespace-nowrap">
-                      +{recipe.ingredients.length - 4} más
-                    </span>
-                  )}
+                {/* Footer con botones — siempre visible, separado del contenido */}
+                <div className="flex border-t border-caramel/15 dark:border-amber-700/20">
+                  <motion.button
+                    whileTap={{ scale: 0.93 }}
+                    onClick={() => handleEdit(recipe)}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 text-xs sm:text-sm font-semibold text-primary/70 dark:text-amber-300/70 hover:text-primary dark:hover:text-amber-200 hover:bg-caramel/10 dark:hover:bg-amber-800/20 transition-all"
+                  >
+                    <Edit2 size={14} className="sm:w-4 sm:h-4" />
+                    Editar
+                  </motion.button>
+                  <div className="w-px bg-caramel/15 dark:bg-amber-700/20" />
+                  <motion.button
+                    whileTap={{ scale: 0.93 }}
+                    onClick={() => handleDelete(recipe.id)}
+                    className="flex-1 flex items-center justify-center gap-2 py-3 text-xs sm:text-sm font-semibold text-red-400/70 hover:text-red-500 hover:bg-red-50/50 dark:hover:bg-red-900/20 transition-all"
+                  >
+                    <Trash2 size={14} className="sm:w-4 sm:h-4" />
+                    Eliminar
+                  </motion.button>
                 </div>
               </motion.div>
             ))
