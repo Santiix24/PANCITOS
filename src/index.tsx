@@ -1682,7 +1682,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-b from-primary via-mocha to-caramel/90 dark:from-[#0D0D0D] dark:via-[#141414] dark:to-[#1A1A1A] z-10 pt-5 sm:pt-6 pb-4 sm:pb-5 space-y-4 sm:space-y-5 -mx-3 sm:-mx-5 px-4 sm:px-6 rounded-2xl sm:rounded-[32px] shadow-warm dark:shadow-[0_8px_32px_rgba(212,175,55,0.15)] backdrop-blur-sm transition-colors duration-300"
+          className="sticky top-0 bg-gradient-to-b from-primary via-mocha to-caramel/90 dark:from-[#0D0D0D] dark:via-[#141414] dark:to-[#1A1A1A] z-10 pt-5 sm:pt-6 pb-4 sm:pb-5 space-y-4 sm:space-y-5 -mx-3 sm:-mx-5 px-4 sm:px-6 rounded-b-2xl sm:rounded-b-[32px] shadow-warm dark:shadow-[0_8px_32px_rgba(212,175,55,0.15)] backdrop-blur-sm transition-colors duration-300"
         >
           <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <motion.div
@@ -2017,7 +2017,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-b from-primary via-mocha to-caramel/90 dark:from-[#0D0D0D] dark:via-[#141414] dark:to-[#1A1A1A] z-10 pt-5 sm:pt-6 pb-4 sm:pb-5 space-y-4 sm:space-y-5 -mx-3 sm:-mx-5 px-4 sm:px-6 rounded-2xl sm:rounded-[32px] shadow-warm dark:shadow-[0_8px_32px_rgba(212,175,55,0.15)] backdrop-blur-sm transition-colors duration-300"
+        className="sticky top-0 bg-gradient-to-b from-primary via-mocha to-caramel/90 dark:from-[#0D0D0D] dark:via-[#141414] dark:to-[#1A1A1A] z-10 pt-5 sm:pt-6 pb-4 sm:pb-5 space-y-4 sm:space-y-5 -mx-3 sm:-mx-5 px-4 sm:px-6 rounded-b-2xl sm:rounded-b-[32px] shadow-warm dark:shadow-[0_8px_32px_rgba(212,175,55,0.15)] backdrop-blur-sm transition-colors duration-300"
       >
         <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
           <motion.div 
