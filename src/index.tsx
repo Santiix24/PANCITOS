@@ -995,18 +995,23 @@ const ROLE_INFO: Record<User['role'], { label: string; badge: string; emoji: str
 };
 
 // ============================================================================
-// LOGO ANIMADO — alterna entre 🍞 y 🥐
+// LOGO ANIMADO — cicla entre productos de panadería, cambia en cada login
 // ============================================================================
+const LOGO_EMOJIS = ['🍞', '🥐', '🥖', '🧁', '🎂', '🍩', '🥨', '🫓', '🍰', '🧇'];
+
 const LogoEmoji: React.FC<{ className?: string }> = ({ className = 'text-6xl' }) => {
-  const [isBread, setIsBread] = React.useState(true);
+  const [idx, setIdx] = React.useState(() => {
+    const stored = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10);
+    return stored % LOGO_EMOJIS.length;
+  });
   React.useEffect(() => {
-    const t = setInterval(() => setIsBread(p => !p), 2500);
+    const t = setInterval(() => setIdx(p => (p + 1) % LOGO_EMOJIS.length), 2500);
     return () => clearInterval(t);
   }, []);
   return (
     <AnimatePresence mode="wait">
       <motion.span
-        key={isBread ? 'bread' : 'croissant'}
+        key={idx}
         initial={{ opacity: 0, scale: 0.4, rotate: -15 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         exit={{ opacity: 0, scale: 0.4, rotate: 15 }}
@@ -1014,7 +1019,7 @@ const LogoEmoji: React.FC<{ className?: string }> = ({ className = 'text-6xl' })
         className={`inline-block ${className}`}
         style={{ display: 'inline-block' }}
       >
-        {isBread ? '🍞' : '🥐'}
+        {LOGO_EMOJIS[idx]}
       </motion.span>
     </AnimatePresence>
   );
@@ -4843,6 +4848,8 @@ const App: React.FC = () => {
 
   if (!state.user) {
     return <LoginPage onLogin={(user, remember) => {
+      const curr = parseInt(localStorage.getItem('pancitos-logo-idx') || '0', 10);
+      localStorage.setItem('pancitos-logo-idx', String((curr + 1) % LOGO_EMOJIS.length));
       state.setUser(user);
       if (remember) state.setRememberMe(true);
     }} />;
