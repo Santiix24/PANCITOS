@@ -1946,30 +1946,30 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                 whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(196, 149, 106, 0.25)' }}
                 className="card-vintage bg-gradient-to-br from-vanilla/95 to-wheat/90 dark:from-[#1A1A1A]/95 dark:to-[#0D0D0D]/90 border-2 border-caramel/40 dark:border-amber-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 hover:shadow-warm transition-all cursor-pointer active:scale-95 group"
               >
-                <div className="flex justify-between items-start mb-3 sm:mb-4">
+                <div className="flex justify-between items-start mb-3 sm:mb-4 gap-2">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg sm:text-2xl font-bold font-serif text-primary dark:text-white mb-1.5 sm:mb-2 truncate">
+                    <h3 className="text-base sm:text-2xl font-bold font-serif text-primary dark:text-white mb-1.5 sm:mb-2 truncate">
                       {recipe.name}
                     </h3>
-                    <div className="flex gap-1.5 sm:gap-2 flex-wrap">
+                    <div className="flex gap-1 sm:gap-2 flex-wrap">
                       <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gradient-to-r from-peach/50 to-caramel/40 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-caramel/30 dark:border-amber-500/40">
                         {recipe.category === 'Panadería' ? '🍞' : '🎂'} {recipe.category}
                       </span>
-                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blush/40 dark:bg-[#141414]/70 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-blush/50 dark:border-amber-500/30 truncate max-w-[100px] sm:max-w-none">
+                      <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-blush/40 dark:bg-[#141414]/70 text-primary dark:text-white text-[10px] sm:text-xs rounded-full font-semibold border border-blush/50 dark:border-amber-500/30 truncate max-w-[90px] sm:max-w-none">
                         👨‍🍳 {recipe.createdBy}
                       </span>
                     </div>
                   </div>
-                  <div className="flex gap-1.5 sm:gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all">
+                  <div className="flex gap-1 sm:gap-2 flex-shrink-0 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all">
                     <motion.button
                       whileTap={{ scale: 0.8 }}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEdit(recipe);
                       }}
-                      className="bg-secondary/30 hover:bg-secondary/50 text-primary dark:text-white p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-caramel/20"
+                      className="bg-secondary/30 hover:bg-secondary/50 text-primary dark:text-white p-2 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-caramel/20"
                     >
-                      <Edit2 size={16} className="sm:w-5 sm:h-5" />
+                      <Edit2 size={15} className="sm:w-5 sm:h-5" />
                     </motion.button>
                     <motion.button
                       whileTap={{ scale: 0.8 }}
@@ -1977,31 +1977,44 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
                         e.stopPropagation();
                         handleDelete(recipe.id);
                       }}
-                      className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-amber-200 p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-blush/30"
+                      className="bg-blush/40 hover:bg-blush/60 text-primary dark:text-amber-200 p-2 rounded-lg sm:rounded-xl transition-all hover:shadow-lg border border-blush/30"
                     >
-                      <Trash2 size={16} className="sm:w-5 sm:h-5" />
+                      <Trash2 size={15} className="sm:w-5 sm:h-5" />
                     </motion.button>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  <div className="glass-warm bg-gradient-to-br from-peach/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-caramel/25">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">🥄 ING</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-400">{recipe.ingredients.length}</p>
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mb-3 sm:mb-4">
+                  <div className="glass-warm bg-gradient-to-br from-peach/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-caramel/25">
+                    <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">🥄 ING</p>
+                    <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-400">{recipe.ingredients.length}</p>
                   </div>
-                  <div className="glass-warm bg-gradient-to-br from-blush/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-blush/30">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">🌡️ T</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-200">{recipe.temperature}°</p>
+                  <div className="glass-warm bg-gradient-to-br from-blush/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-blush/30">
+                    <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">🌡️ T</p>
+                    <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-200">{recipe.temperature}°</p>
                   </div>
-                  <div className="glass-warm bg-gradient-to-br from-honey/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-3 rounded-xl border border-honey/30">
-                    <p className="opacity-70 text-xs font-semibold text-primary dark:text-white">⏱️ T</p>
-                    <p className="font-bold text-lg text-primary dark:text-amber-300">{recipe.time}m</p>
+                  <div className="glass-warm bg-gradient-to-br from-honey/50 to-vanilla/40 dark:from-[#1A1A1A]/75 dark:to-[#0D0D0D]/50 p-2 sm:p-3 rounded-xl border border-honey/30">
+                    <p className="opacity-70 text-[10px] sm:text-xs font-semibold text-primary dark:text-white">⏱️ T</p>
+                    <p className="font-bold text-base sm:text-lg text-primary dark:text-amber-300">{recipe.time}m</p>
                   </div>
                 </div>
 
-                <p className="text-xs text-mocha dark:text-amber-100 line-clamp-2 font-medium opacity-80">
-                  {recipe.ingredients.map(ing => `${ing.name}`).join(' • ')}
-                </p>
+                {/* Ingredientes: chips en lugar de texto corrido */}
+                <div className="flex flex-wrap gap-1">
+                  {recipe.ingredients.slice(0, 4).map((ing) => (
+                    <span
+                      key={ing.id}
+                      className="text-[10px] sm:text-xs bg-caramel/15 dark:bg-amber-500/15 text-mocha dark:text-amber-200 px-2 py-0.5 rounded-full font-medium border border-caramel/20 dark:border-amber-500/20 truncate max-w-[100px] sm:max-w-none"
+                    >
+                      {ing.name}
+                    </span>
+                  ))}
+                  {recipe.ingredients.length > 4 && (
+                    <span className="text-[10px] sm:text-xs bg-mocha/10 dark:bg-white/10 text-mocha/60 dark:text-amber-100/50 px-2 py-0.5 rounded-full font-medium">
+                      +{recipe.ingredients.length - 4} más
+                    </span>
+                  )}
+                </div>
               </motion.div>
             ))
           )}
