@@ -814,6 +814,134 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 };
 
 // ============================================================================
+// MODAL DE CONFIRMACIÓN PERSONALIZADO
+// ============================================================================
+
+interface ConfirmOptions {
+  title: string;
+  description?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  danger?: boolean;
+  icon?: string;
+}
+
+interface ConfirmContextType {
+  showConfirm: (options: ConfirmOptions) => Promise<boolean>;
+}
+
+const ConfirmContext = React.createContext<ConfirmContextType>({ showConfirm: async () => false });
+
+const useConfirm = () => React.useContext(ConfirmContext);
+
+interface ConfirmState extends ConfirmOptions {
+  resolve: (value: boolean) => void;
+}
+
+const ConfirmProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [confirmState, setConfirmState] = React.useState<ConfirmState | null>(null);
+
+  const showConfirm = (options: ConfirmOptions): Promise<boolean> =>
+    new Promise((resolve) => setConfirmState({ ...options, resolve }));
+
+  const handleResponse = (value: boolean) => {
+    confirmState?.resolve(value);
+    setConfirmState(null);
+  };
+
+  return (
+    <ConfirmContext.Provider value={{ showConfirm }}>
+      {children}
+
+      <AnimatePresence>
+        {confirmState && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="confirm-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => handleResponse(false)}
+              className="fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm"
+            />
+
+            {/* Modal */}
+            <motion.div
+              key="confirm-modal"
+              initial={{ opacity: 0, scale: 0.85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 10 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 28 }}
+              className="fixed inset-0 z-[9999] flex items-center justify-center px-5 pointer-events-none"
+            >
+              <div className="pointer-events-auto w-full max-w-xs sm:max-w-sm bg-gradient-to-br from-vanilla to-wheat dark:from-[#1A1A1A] dark:to-[#141414] rounded-3xl shadow-2xl border border-caramel/30 dark:border-amber-500/20 overflow-hidden">
+                {/* Top accent stripe */}
+                <div className={`h-1.5 w-full ${confirmState.danger ? 'bg-gradient-to-r from-red-400 to-rose-500' : 'bg-gradient-to-r from-caramel to-honey'}`} />
+
+                <div className="p-6 sm:p-7">
+                  {/* Icon */}
+                  <motion.div
+                    initial={{ scale: 0.5, rotate: -10 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 20, delay: 0.05 }}
+                    className={`w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl shadow-lg ${
+                      confirmState.danger
+                        ? 'bg-gradient-to-br from-red-100 to-rose-100 dark:from-red-900/40 dark:to-rose-900/40 border-2 border-red-200 dark:border-red-700/50'
+                        : 'bg-gradient-to-br from-honey/30 to-caramel/20 border-2 border-caramel/30'
+                    }`}
+                  >
+                    {confirmState.icon ?? (confirmState.danger ? '🗑️' : '❓')}
+                  </motion.div>
+
+                  {/* Title */}
+                  <h3 className="text-center font-bold text-lg sm:text-xl text-primary dark:text-white mb-2 font-playfair">
+                    {confirmState.title}
+                  </h3>
+
+                  {/* Description */}
+                  {confirmState.description && (
+                    <p className="text-center text-xs sm:text-sm text-mocha/60 dark:text-amber-100/50 leading-relaxed mb-5">
+                      {confirmState.description}
+                    </p>
+                  )}
+                  {!confirmState.description && <div className="mb-5" />}
+
+                  {/* Buttons */}
+                  <div className="flex gap-3">
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => handleResponse(false)}
+                      className="flex-1 py-3 rounded-2xl font-semibold text-sm text-mocha/70 dark:text-amber-100/60 bg-white/70 dark:bg-white/8 border border-caramel/25 dark:border-white/10 hover:bg-white dark:hover:bg-white/15 transition-all"
+                    >
+                      {confirmState.cancelLabel ?? 'Cancelar'}
+                    </motion.button>
+
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.96 }}
+                      onClick={() => handleResponse(true)}
+                      className={`flex-1 py-3 rounded-2xl font-bold text-sm text-white shadow-lg transition-all ${
+                        confirmState.danger
+                          ? 'bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 shadow-red-500/30'
+                          : 'bg-gradient-to-r from-primary to-mocha hover:from-mocha hover:to-primary shadow-primary/30'
+                      }`}
+                    >
+                      {confirmState.confirmLabel ?? 'Confirmar'}
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </ConfirmContext.Provider>
+  );
+};
+
+// ============================================================================
 // HELPER: VERIFICAR DISPONIBILIDAD DE INGREDIENTES EN INVENTARIO
 // ============================================================================
 
@@ -1392,6 +1520,7 @@ const MobileNavbar: React.FC<{
 const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user, isMobile = true }) => {
   const state = useAppState();
   const { showToast } = useToast();
+  const { showConfirm } = useConfirm();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState<'all' | 'Panadería' | 'Pastelería'>('all');
@@ -1486,8 +1615,15 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
     setShowForm(true);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('¿Eliminar esta receta?')) {
+  const handleDelete = async (id: string) => {
+    const recipe = state.recipes.find((r) => r.id === id);
+    const ok = await showConfirm({
+      title: '¿Eliminar receta?',
+      description: recipe ? `«${recipe.name}» será eliminada permanentemente.` : 'Esta acción no se puede deshacer.',
+      confirmLabel: 'Sí, eliminar',
+      danger: true,
+    });
+    if (ok) {
       state.deleteRecipe(id);
       showToast('Receta eliminada', 'warning');
     }
@@ -2026,6 +2162,7 @@ const RecipesView: React.FC<{ user: User | null; isMobile?: boolean }> = ({ user
 const CalculatorView: React.FC = () => {
   const state = useAppState();
   const { showToast } = useToast();
+  const { showConfirm: _sc } = useConfirm(); // disponible por si se necesita
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
   const [scaleType, setScaleType] = useState<'quantity' | 'ingredient'>('quantity');
   const [baseIngredientId, setBaseIngredientId] = useState<string | null>(null);
@@ -2521,6 +2658,7 @@ const CalculatorView: React.FC = () => {
 const InventoryView: React.FC = () => {
   const state = useAppState();
   const { showToast } = useToast();
+  const { showConfirm } = useConfirm();
   const user = state.user!;
   const canEdit = PERMS.canEditInventory(user.role);
   const [showForm, setShowForm] = useState(false);
@@ -2625,8 +2763,15 @@ const InventoryView: React.FC = () => {
     setShowForm(true);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('¿Eliminar este insumo?')) {
+  const handleDelete = async (id: string) => {
+    const op = state.operations.find((o) => o.id === id);
+    const ok = await showConfirm({
+      title: '¿Eliminar insumo?',
+      description: op ? `«${op.name}» será eliminado del inventario.` : 'Esta acción no se puede deshacer.',
+      confirmLabel: 'Sí, eliminar',
+      danger: true,
+    });
+    if (ok) {
       state.deleteOperation(id);
       showToast('Insumo eliminado', 'warning');
     }
@@ -3090,6 +3235,7 @@ const MiniSparkline: React.FC<{ values: number[]; color: string }> = ({ values, 
 const UsersView: React.FC = () => {
   const state = useAppState();
   const { showToast } = useToast();
+  const { showConfirm } = useConfirm();
   const user = state.user!;
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -3155,8 +3301,15 @@ const UsersView: React.FC = () => {
     setShowForm(true);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('¿Eliminar este usuario? Esta acción no se puede deshacer.')) {
+  const handleDelete = async (id: string) => {
+    const cu = (state.customUsers || []).find((u) => u.id === id);
+    const ok = await showConfirm({
+      title: '¿Eliminar usuario?',
+      description: cu ? `«${cu.displayName}» perderá acceso al sistema.` : 'Esta acción no se puede deshacer.',
+      confirmLabel: 'Sí, eliminar',
+      danger: true,
+    });
+    if (ok) {
       state.deleteCustomUser(id);
       showToast('Usuario eliminado', 'warning');
     }
@@ -4761,6 +4914,8 @@ const App: React.FC = () => {
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <ToastProvider>
-    <App />
+    <ConfirmProvider>
+      <App />
+    </ConfirmProvider>
   </ToastProvider>
 );
