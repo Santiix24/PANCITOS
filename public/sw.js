@@ -1,8 +1,9 @@
-const CACHE_NAME = 'calipan-virrey-v3';
+const CACHE_NAME = 'calipan-virrey-v4';
+const BASE = '/PANCITOS';
 const URLS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  BASE + '/',
+  BASE + '/index.html',
+  BASE + '/manifest.json',
 ];
 
 console.log('🔧 Service Worker v3 cargado');
@@ -129,8 +130,8 @@ self.addEventListener('fetch', (event) => {
         // Si es una navegación HTML, retornar index.html cacheado
         if (request.mode === 'navigate') {
           console.log('📄 Retornando index.html para:', request.url);
-          return caches.match('/index.html') || 
-            caches.match('/') ||
+          return caches.match(BASE + '/index.html') || 
+            caches.match(BASE + '/') ||
             new Response(
               '<!DOCTYPE html><html><body>Aplicación en modo offline. Los datos se cargarán desde localStorage.</body></html>',
               { 

@@ -680,8 +680,8 @@
           try {
             console.log('🔧 Iniciando registro de Service Worker...');
             
-            const reg = await navigator.serviceWorker.register('/sw.js', {
-              scope: '/',
+            const reg = await navigator.serviceWorker.register('/PANCITOS/sw.js', {
+              scope: '/PANCITOS/',
             });
             
             console.log('✅ Service Worker registrado correctamente:', reg);
@@ -708,9 +708,9 @@
               navigator.serviceWorker.controller.postMessage({
                 type: 'CACHE_ASSETS',
                 assets: [
-                  '/',
-                  '/index.html',
-                  '/manifest.json',
+                  '/PANCITOS/',
+                  '/PANCITOS/index.html',
+                  '/PANCITOS/manifest.json',
                 ],
               });
             }
